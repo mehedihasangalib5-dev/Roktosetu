@@ -52,6 +52,11 @@ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 .setrow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;padding:11px 4px;cursor:pointer;color:var(--tx);font-size:14.5px;font-weight:600;border-bottom:1px solid var(--bd)}
 .setrow:last-child{border-bottom:0}
 .setrow span.si{font-size:17px;width:22px;text-align:center}
+.setrow .picon{margin:0}
+.setrow .stxt{flex:1}
+.setrow .chev{color:var(--mut);font-size:12.5px;font-weight:600;flex:none}
+.sechead{font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--mut);margin:26px 4px 8px}
+.pill.blood{background:color-mix(in srgb,var(--ac) 13%,transparent);color:var(--ac)}
 .langbtn{background:var(--card);border:1px solid var(--bd);border-radius:99px;height:38px;padding:0 13px;cursor:pointer;font-weight:700;flex:none;font-size:13px}
 #installBtn{display:none}
 #offbar{display:none;position:sticky;top:calc(64px + env(safe-area-inset-top,0px));z-index:19;background:var(--warn);color:#fff;text-align:center;font-size:13px;font-weight:600;padding:6px}
@@ -526,17 +531,31 @@ function profile(){
   if(profileEdit||!m)return editProfileView();
   const my=S.reqs.filter(r=>r.uid===user.uid),photo=PENDING_PHOTO||m.photo||null;
   return `<h2>${t("nav_profile")}</h2>
-  <div class="card" style="max-width:520px;margin:0 auto 20px;text-align:center">
+  <div style="max-width:520px;margin:0 auto 20px">
+  <div class="card" style="text-align:center">
   <div class="avwrap">${avatarHTML(photo,m.g,92)}<button class="cam" title="${t("change_photo")}" onclick="$('#avatarInput').click()">📷</button></div>
-  <b style="font-size:19px">${esc(m.name)}</b><br><span class="meta">📍 ${m.d}</span>
-  <div class="stats" style="margin-top:18px"><div class="stat"><b>${my.length}</b><small>${t("my_stats_req")}</small></div><div class="stat"><b style="font-size:16px">${eligible(m)?"✅":"⏳"}</b><small>${eligible(m)?t("eligible_now"):t("next_eligible",90-m.last)}</small></div></div>
+  <b style="font-size:19px">${esc(m.name)}</b><br><span class="meta">📍 ${m.d}</span><br>
+  <span class="pill blood" style="margin-top:8px">🩸 ${m.g} · ${eligible(m)?t("eligible_now"):t("next_eligible",90-m.last)}</span>
+  <div class="stats" style="margin-top:18px"><div class="stat"><b>${my.length}</b><small>${t("my_stats_req")}</small></div><div class="stat"><b style="font-size:16px">${eligible(m)?"✅":"⏳"}</b><small>${t("my_stats_elig")}</small></div></div>
   <div style="text-align:left;margin-top:18px">
   <div class="prow"><div class="picon">🩸</div><div style="flex:1"><b>${m.g}</b><br><span class="meta" style="margin:0">${t("lbl_group")}</span></div></div>
   <div class="prow"><div class="picon">📞</div><div style="flex:1"><b>${esc(m.ph)}</b><br><span class="meta" style="margin:0">${t("lbl_phone")}</span></div></div>
   <div class="prow"><div class="picon">📍</div><div style="flex:1"><b>${m.d}</b><br><span class="meta" style="margin:0">${t("lbl_district")}</span></div></div>
   </div>
   <label style="display:flex;gap:9px;align-items:center;margin:16px 0 4px"><input type="checkbox" style="width:auto" ${m.av?"checked":""} onchange="toggleAv(this.checked)"> ${t("show_avail")}</label>
-  <div class="acts" style="justify-content:center;margin-top:10px"><button class="btn sm gh" onclick="setProfileEdit(true)">✏️ ${t("edit_profile2")}</button><button class="btn sm gh" onclick="openSettings()">⚙️ ${t("settings")}</button></div>
+  <button class="btn sm gh" style="width:100%;margin-top:6px" onclick="setProfileEdit(true)">✏️ ${t("edit_profile2")}</button>
+  </div>
+  <div class="sechead">${t("settings_h")}</div>
+  <div class="card" style="text-align:left;padding:6px 14px">
+  <button class="setrow" onclick="setLang(LANG==='bn'?'en':'bn')"><span class="picon">🌐</span><span class="stxt">${t("settings_lang")}</span><span class="chev">${LANG==="bn"?"বাংলা":"English"} ›</span></button>
+  <button class="setrow" onclick="toggleTheme()"><span class="picon">◐</span><span class="stxt">${t("settings_theme")}</span><span class="chev">›</span></button>
+  ${deferredInstall?`<button class="setrow" onclick="doInstall()"><span class="picon">⬇</span><span class="stxt">${t("settings_install")}</span><span class="chev">›</span></button>`:""}
+  <button class="setrow" onclick="pwReset()"><span class="picon">🔑</span><span class="stxt">${t("settings_pw")}</span><span class="chev">›</span></button>
+  ${isAdmin?`<div class="prow"><div class="picon">🛡</div><span class="meta" style="margin:0">${t("settings_admin")}</span></div>`:""}
+  <button class="setrow" onclick="delMe()"><span class="picon" style="background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)">🗑</span><span class="stxt">${t("settings_remove")}</span><span class="chev">›</span></button>
+  <button class="setrow" style="color:var(--ac);border-bottom:0" onclick="signOutU()"><span class="picon" style="background:color-mix(in srgb,var(--ac) 12%,transparent);color:var(--ac)">⏻</span><span class="stxt">${t("signout")}</span><span class="chev">›</span></button>
+  </div>
+  <p class="meta" style="margin-top:10px;text-align:center">${t("settings_about")}</p>
   </div>
   <div style="display:grid;gap:12px;max-width:520px;margin:0 auto"><h3 style="margin:0">${t("my_reqs")}</h3>${my.map(reqCard).join("")||`<div class="empty card">${t("no_my_reqs")}</div>`}</div>`
 }
@@ -564,20 +583,7 @@ function regDonor(){
   setDoc(doc(db,"donors",user.uid),{name:n,g:v("d_g"),d:v("d_d"),ph:p,lastMs,av:S.me?S.me.av:true,off,uid:user.uid,...(photo?{photo}:{}),...(LOC.d?{lat:r2(LOC.d[0]),lng:r2(LOC.d[1])}:{})}).then(()=>{toast(LANG==="bn"?"ধন্যবাদ, হিরো! আপনি এখন তালিকাভুক্ত।":"Thank you, hero! You're now listed.");PENDING_PHOTO=null;profileEdit=false;go("profile")}).catch(fe);
 }
 function delMe(){deleteDoc(doc(db,"donors",user.uid)).then(()=>{profileEdit=false;toast(LANG==="bn"?"প্রোফাইল সরানো হয়েছে":"Profile removed")}).catch(fe)}
-function openSettings(){open(settingsView())}
-function settingsView(){
-  const m=S.me;
-  return `<h3 style="margin-top:0">${t("settings_h")}</h3><div>
-  <button class="setrow" onclick="closeM();setLang(LANG==='bn'?'en':'bn')"><span class="si">🌐</span>${t("settings_lang")}<span style="margin-left:auto;color:var(--mut)">${LANG==="bn"?"বাংলা":"English"}</span></button>
-  <button class="setrow" onclick="toggleTheme()"><span class="si">◐</span>${t("settings_theme")}</button>
-  ${deferredInstall?`<button class="setrow" onclick="closeM();doInstall()"><span class="si">⬇</span>${t("settings_install")}</button>`:""}
-  ${m?`<button class="setrow" onclick="closeM();setProfileEdit(true);go('profile')"><span class="si">✏️</span>${t("settings_edit")}</button>`:""}
-  <button class="setrow" onclick="closeM();pwReset()"><span class="si">🔑</span>${t("settings_pw")}</button>
-  ${m?`<button class="setrow" onclick="closeM();delMe()"><span class="si">🗑</span>${t("settings_remove")}</button>`:""}
-  ${isAdmin?`<div class="prow"><div class="picon">🛡</div><span class="meta" style="margin:0">${t("settings_admin")}</span></div>`:""}
-  <button class="setrow" style="color:var(--ac)" onclick="closeM();signOutU()"><span class="si">⏻</span>${t("signout")}</button>
-  </div><p class="meta" style="margin-top:12px">${t("settings_about")}</p>`
-}
+function openSettings(){setProfileEdit(false);go("profile")}
 function toggleTheme(){const r=document.documentElement,d=(r.dataset.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"))==="dark";r.dataset.theme=d?"light":"dark"}
 async function pwReset(){
   if(!user||!user.email)return toast(t("settings_pw_nomail"));
