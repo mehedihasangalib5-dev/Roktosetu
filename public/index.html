@@ -341,8 +341,7 @@ function home(){
   const n=S.donors.length,av=S.donors.filter(d=>d.av&&eligible(d)).length,op=S.reqs.filter(r=>!r.done).length;
   const cnt=G.map(g=>[g,S.donors.filter(d=>d.g===g).length]),mx=Math.max(...cnt.map(c=>c[1]),1);
   return `<section class="hero"><div><span class="pill crit">${t("hero_pill")}</span><h1 style="margin-top:14px">${t("hero_h1a")}<span>${t("hero_h1b")}</span>${t("hero_h1c")}</h1>
-  <p class="lead">${t("hero_lead")}</p>
-  <div class="acts"><button class="btn" onclick="go('find')">${t("btn_find")}</button><button class="btn gh" onclick="go('emergency')">${t("btn_emg")}</button><button class="btn gh" onclick="go('profile')">${t("btn_register")}</button><button class="btn gh" onclick="go('directory')">${t("btn_banks")}</button></div></div>
+  <p class="lead">${t("hero_lead")}</p></div>
   <div class="stats"><div class="stat"><b>${n}</b><small>${t("stat_donors")}</small></div><div class="stat"><b>${av}</b><small>${t("stat_ready")}</small></div><div class="stat"><b>${op}</b><small>${t("stat_open")}</small></div><div class="stat"><b>${S.reqs.reduce((a,r)=>a+r.resp,0)}</b><small>${t("stat_resp")}</small></div></div></section>
   <div class="two" style="margin-top:26px"><div class="card"><h3 style="margin:0 0 14px">${t("by_group")}</h3><div class="bars">${cnt.map(([g,c])=>`<div class="bar2"><span>${g}</span><i style="width:${Math.max(6,c/mx*100)}%"></i><span>${c}</span></div>`).join("")}</div></div>
   <div class="card"><h3 style="margin:0 0 6px">${t("compat_title")}</h3><p class="sub" style="margin-bottom:12px">${t("compat_sub")}</p><button class="btn gh sm" onclick="chart()">${t("compat_btn")}</button>
@@ -586,7 +585,7 @@ function delMe(){deleteDoc(doc(db,"donors",user.uid)).then(()=>{profileEdit=fals
 function openSettings(){setProfileEdit(false);go("profile")}
 function toggleTheme(){const r=document.documentElement,d=(r.dataset.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"))==="dark";r.dataset.theme=d?"light":"dark"}
 async function pwReset(){
-  if(!user||!user.email)return toast(t("settings_pw_nomail"));
+  if(!user||!user.email||user.email.endsWith("@phone.roktosetu.app"))return toast(t("settings_pw_nomail"));
   try{await sendPasswordResetEmail(auth,user.email);toast(t("settings_pw_sent"))}catch(x){ae(x)}
 }
 $("#th").onclick=toggleTheme;
