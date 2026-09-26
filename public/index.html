@@ -157,13 +157,31 @@ h1 span{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-backgroun
 .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
 .listcard{transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s}
 .listcard:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(120,20,35,.16)}
+.sk{background:linear-gradient(90deg,color-mix(in srgb,var(--bd) 60%,transparent) 25%,color-mix(in srgb,var(--bd) 100%,transparent) 37%,color-mix(in srgb,var(--bd) 60%,transparent) 63%);background-size:400% 100%;border-radius:8px;animation:shimmer 1.4s ease infinite}
+@keyframes shimmer{0%{background-position:100% 0}100%{background-position:0 0}}
+.skel .sk-c{width:50px;height:50px;border-radius:14px;flex:none}
+.skel .sk-l1{width:70%;height:14px;margin-bottom:8px}
+.skel .sk-l2{width:45%;height:18px;border-radius:99px}
+.skel .sk-l3{width:85%;height:12px;margin:12px 0}
+.skel .sk-btn{width:80px;height:32px;border-radius:10px}
+#app.page-in{animation:pagein .34s cubic-bezier(.2,.85,.25,1)}
+@keyframes pagein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:18px}
+.admin-stats .stat{padding:15px}
+.admin-stats .stat b{font-size:24px}
+.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.arow{display:flex;align-items:center;gap:12px;padding:13px 14px}
+.arow:hover{background:color-mix(in srgb,var(--ac) 5%,transparent)}
+.pending-row{border:1px solid color-mix(in srgb,var(--warn) 40%,var(--bd));background:color-mix(in srgb,var(--warn) 6%,var(--card))}
 h2{font-size:26px;letter-spacing:-.6px;margin:30px 0 6px;font-weight:800}
 h3{font-size:18px;letter-spacing:-.3px;font-weight:700;margin:0 0 4px}
 .sub{color:var(--mut);margin:0 0 18px;font-size:14.5px}
 .filters{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:16px}
-label{font-size:13px;font-weight:600;color:var(--mut);display:block;margin-bottom:5px}
-input,select,textarea{width:100%;padding:11px 12px;border-radius:11px;border:1px solid var(--bd);background:var(--card)}
-input:focus,select:focus,textarea:focus{outline:2px solid var(--ac2);outline-offset:0}
+label{font-size:12.5px;font-weight:700;color:var(--mut);display:block;margin-bottom:6px;letter-spacing:.15px;transition:color .18s,transform .18s}
+input,select,textarea{width:100%;padding:12px 13px;border-radius:11px;border:1.5px solid var(--bd);background:var(--card);transition:border-color .18s,box-shadow .18s;font-size:14.5px}
+input:hover,select:hover,textarea:hover{border-color:color-mix(in srgb,var(--ac) 35%,var(--bd))}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 15%,transparent)}
+.fg>div:focus-within>label,.full:focus-within>label{color:var(--ac);transform:translateY(-1px)}
 .bg{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:17px;color:#fff;background:linear-gradient(135deg,var(--ac2),var(--ac));flex:none}
 .row{display:flex;gap:12px;align-items:center}
 .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px;background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)}
@@ -181,12 +199,15 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ac2);outline-off
 .tbl{width:100%;border-collapse:collapse;font-size:14px}
 .tbl td,.tbl th{padding:8px;text-align:center;border-bottom:1px solid var(--bd)}
 .tbl .y{color:var(--ok);font-weight:800}
-.modal{position:fixed;inset:0;background:rgba(20,10,12,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:none;place-items:center;z-index:50;padding:18px}
-.modal.on{display:grid}
-.modal .card{max-width:520px;width:100%;max-height:85vh;overflow:auto;background:color-mix(in srgb,var(--card) 90%,transparent);backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5);border:1px solid color-mix(in srgb,var(--bd) 70%,transparent)}
-#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(90px);background:#1c1416;color:#fff;padding:12px 18px;border-radius:12px;transition:.3s;z-index:60;max-width:92%;font-size:14px}
-#toast.on{transform:translateX(-50%) translateY(0)}
-.empty{text-align:center;color:var(--mut);padding:36px}
+.modal{position:fixed;inset:0;background:rgba(20,10,12,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:grid;place-items:center;z-index:50;padding:18px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,visibility 0s linear .22s}
+.modal.on{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .22s ease}
+.modal .card{max-width:520px;width:100%;max-height:85vh;overflow:auto;background:color-mix(in srgb,var(--card) 90%,transparent);backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5);border:1px solid color-mix(in srgb,var(--bd) 70%,transparent);transform:translateY(16px) scale(.96);opacity:0;transition:transform .28s cubic-bezier(.2,.9,.25,1.15),opacity .22s}
+.modal.on .card{transform:translateY(0) scale(1);opacity:1}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(16px) scale(.94);opacity:0;background:#1c1416;color:#fff;padding:12px 18px;border-radius:12px;transition:transform .32s cubic-bezier(.2,.9,.25,1.3),opacity .25s;z-index:60;max-width:92%;font-size:14px;box-shadow:0 14px 32px rgba(0,0,0,.28);pointer-events:none}
+#toast.on{transform:translateX(-50%) translateY(0) scale(1);opacity:1}
+.empty{text-align:center;color:var(--mut);padding:36px 20px}
+.empty-ico{display:block;margin:0 auto 14px}
+.empty p{margin:0;font-size:14.5px}
 footer{margin:50px 0 30px;color:var(--mut);font-size:13px;text-align:center}
 @media(max-width:760px){.hero,.two{grid-template-columns:1fr}}
 .map{height:480px;border-radius:18px;border:1px solid var(--bd);overflow:hidden;position:relative;z-index:0;isolation:isolate;box-shadow:var(--sh)}
@@ -265,6 +286,15 @@ en:{
  compat_chart_title:"Compatibility chart",compat_can:"Can receive from",matches_for:"Matches for",no_district_match:"No matching donors in this district yet. Try searching nearby districts.",
  close:"Close",offline:"You're offline — showing saved data",
  donor_id:"Donor ID",profile_updated_title:"Profile Updated",profile_updated_msg:"Your profile has been updated successfully. Thanks for being a lifesaver! 🩸",profile_updated_msg_new:"You're now registered as a donor. Thanks for becoming a hero! 🎉",okay_thanks:"Okay, Thanks",welcome:"Welcome",
+ admin_h:"Admin Panel",admin_sub:"Manage donors, requests and facilities across RoktoSetu.",admin_open:"Open Admin Panel",
+ admin_tab_overview:"Overview",admin_tab_donors:"Donors",admin_tab_requests:"Requests",admin_tab_facilities:"Facilities",
+ admin_stat_donors:"Total Donors",admin_stat_avail:"Available Now",admin_stat_open:"Open Requests",admin_stat_pending:"Pending Facilities",admin_stat_verified:"Verified Facilities",admin_stat_resp:"Total Responses",
+ admin_search_donor:"Search donors by name, phone or district…",admin_search_req:"Search requests by patient or hospital…",
+ admin_no_donors:"No donors registered yet.",admin_no_reqs:"No requests yet.",admin_no_pending:"No facilities awaiting review 🎉",admin_no_verified:"No verified facilities yet.",
+ admin_pending_review:"Pending review",admin_verified_list:"Verified listings",
+ admin_confirm_del_donor:"Remove {n}'s donor profile? This cannot be undone.",admin_confirm_del_req:"Delete this request permanently?",
+ admin_deleted:"Deleted",admin_marked_done:"Marked as fulfilled",admin_reopened:"Reopened",
+ admin_mark_done:"Mark done",admin_reopen:"Reopen",admin_by_group:"Donors by blood group",
 },
 bn:{
  nav_home:"হোম",nav_find:"ডোনার খুঁজুন",nav_emergency:"জরুরি",nav_directory:"ডিরেক্টরি",nav_register:"ডোনার হোন",nav_me:"ড্যাশবোর্ড",nav_profile:"প্রোফাইল",signout:"সাইন আউট",
@@ -308,6 +338,15 @@ bn:{
  compat_chart_title:"কম্প্যাটিবিলিটি চার্ট",compat_can:"যাদের থেকে নিতে পারবেন",matches_for:"এর জন্য মিল",no_district_match:"এই জেলায় এখনো মিলছে এমন ডোনার নেই। কাছের জেলা খুঁজে দেখুন।",
  close:"বন্ধ করুন",offline:"আপনি অফলাইনে আছেন — সংরক্ষিত তথ্য দেখানো হচ্ছে",
  donor_id:"ডোনার আইডি",profile_updated_title:"প্রোফাইল আপডেট হয়েছে",profile_updated_msg:"আপনার প্রোফাইল সফলভাবে আপডেট হয়েছে। জীবন বাঁচানোর জন্য ধন্যবাদ! 🩸",profile_updated_msg_new:"আপনি এখন একজন ডোনার হিসেবে নিবন্ধিত। হিরো হওয়ার জন্য ধন্যবাদ! 🎉",okay_thanks:"ঠিক আছে, ধন্যবাদ",welcome:"স্বাগতম",
+ admin_h:"অ্যাডমিন প্যানেল",admin_sub:"RoktoSetu-র ডোনার, রিকোয়েস্ট আর প্রতিষ্ঠান পরিচালনা করুন।",admin_open:"অ্যাডমিন প্যানেল খুলুন",
+ admin_tab_overview:"ওভারভিউ",admin_tab_donors:"ডোনার",admin_tab_requests:"রিকোয়েস্ট",admin_tab_facilities:"প্রতিষ্ঠান",
+ admin_stat_donors:"মোট ডোনার",admin_stat_avail:"এখন উপলব্ধ",admin_stat_open:"খোলা রিকোয়েস্ট",admin_stat_pending:"পর্যালোচনা বাকি",admin_stat_verified:"ভেরিফায়েড প্রতিষ্ঠান",admin_stat_resp:"মোট রেসপন্স",
+ admin_search_donor:"নাম, ফোন বা জেলা দিয়ে ডোনার খুঁজুন…",admin_search_req:"রোগী বা হাসপাতাল দিয়ে রিকোয়েস্ট খুঁজুন…",
+ admin_no_donors:"এখনো কোনো ডোনার নিবন্ধিত হয়নি।",admin_no_reqs:"এখনো কোনো রিকোয়েস্ট নেই।",admin_no_pending:"পর্যালোচনার অপেক্ষায় কোনো প্রতিষ্ঠান নেই 🎉",admin_no_verified:"এখনো কোনো ভেরিফায়েড প্রতিষ্ঠান নেই।",
+ admin_pending_review:"পর্যালোচনা বাকি",admin_verified_list:"ভেরিফায়েড তালিকা",
+ admin_confirm_del_donor:"{n}-এর ডোনার প্রোফাইল মুছে ফেলবেন? এটি ফেরানো যাবে না।",admin_confirm_del_req:"এই রিকোয়েস্টটা স্থায়ীভাবে মুছে ফেলবেন?",
+ admin_deleted:"মুছে ফেলা হয়েছে",admin_marked_done:"সম্পন্ন হিসেবে চিহ্নিত হয়েছে",admin_reopened:"আবার খোলা হয়েছে",
+ admin_mark_done:"সম্পন্ন করুন",admin_reopen:"আবার খুলুন",admin_by_group:"ব্লাড গ্রুপ অনুযায়ী ডোনার",
 }};
 const t=(k,v)=>{let s=(I18N[LANG]&&I18N[LANG][k])!=null?I18N[LANG][k]:(I18N.en[k]||k);if(v!=null)s=s.replace("{n}",v);return s};
 function setLang(l){LANG=l;try{localStorage.setItem(LS_LANG,l)}catch(e){}document.documentElement.lang=l;render()}
@@ -326,7 +365,7 @@ const firebaseConfig={
   measurementId:"G-SLQLXNHZ0R"
 };
 const CONFIGURED=!firebaseConfig.apiKey.startsWith("YOUR_");
-let app,auth,db,user=null,isAdmin=false,unsubs=[],dirty=false,S={donors:[],reqs:[],facs:[],me:null};
+let app,auth,db,user=null,isAdmin=false,unsubs=[],dirty=false,S={donors:[],reqs:[],facs:[],me:null,loaded:{donors:false,reqs:false,facs:false}};
 const busy=()=>{const a=document.activeElement;return a&&/INPUT|TEXTAREA|SELECT/.test(a.tagName)&&document.querySelector("#app").contains(a)};
 const soft=()=>{busy()?dirty=true:render()};
 addEventListener("focusout",()=>setTimeout(()=>{if(dirty&&!busy()){dirty=false;render()}},250));
@@ -334,9 +373,9 @@ const fe=e=>toast(e.code||e.message);
 function listen(){
   unsubs.forEach(f=>f());
   unsubs=[
-    onSnapshot(collection(db,"donors"),sn=>{S.donors=sn.docs.map(d=>{const x=d.data();return{...x,id:d.id,last:Math.floor((Date.now()-(x.lastMs||0))/864e5)}});S.me=S.donors.find(d=>d.id===user.uid)||null;soft()},fe),
-    onSnapshot(query(collection(db,"requests"),orderBy("t","desc")),sn=>{S.reqs=sn.docs.map(d=>{const x=d.data(),rs=x.responders||[];return{...x,id:d.id,t:x.t?x.t.toMillis():Date.now(),responders:rs,resp:rs.length}});soft()},fe),
-    onSnapshot(query(collection(db,"facilities"),orderBy("name")),sn=>{S.facs=sn.docs.map(d=>{const x=d.data();return{...x,id:d.id,stockAt:x.stockAt?x.stockAt.toMillis():null}});soft()},fe)
+    onSnapshot(collection(db,"donors"),sn=>{S.donors=sn.docs.map(d=>{const x=d.data();return{...x,id:d.id,last:Math.floor((Date.now()-(x.lastMs||0))/864e5)}});S.me=S.donors.find(d=>d.id===user.uid)||null;S.loaded.donors=true;soft()},fe),
+    onSnapshot(query(collection(db,"requests"),orderBy("t","desc")),sn=>{S.reqs=sn.docs.map(d=>{const x=d.data(),rs=x.responders||[];return{...x,id:d.id,t:x.t?x.t.toMillis():Date.now(),responders:rs,resp:rs.length}});S.loaded.reqs=true;soft()},fe),
+    onSnapshot(query(collection(db,"facilities"),orderBy("name")),sn=>{S.facs=sn.docs.map(d=>{const x=d.data();return{...x,id:d.id,stockAt:x.stockAt?x.stockAt.toMillis():null}});S.loaded.facs=true;soft()},fe)
   ];
 }
 function setup(){return `<div class="card" style="margin:40px auto;max-width:640px"><h2 style="margin-top:0">Firebase setup needed</h2><p class="sub">Paste your Firebase web config into <code>firebaseConfig</code> at the top of the script, enable Email/Password and Google sign-in, create a Firestore database, and publish <code>firestore.rules</code>.</p></div>`}
@@ -377,6 +416,8 @@ const signOutU=()=>signOut(auth);
 const toggleAv=v=>updateDoc(doc(db,"donors",user.uid),{av:v}).then(()=>toast(v?(LANG==="bn"?"আপনি অনুসন্ধানকারীদের কাছে দৃশ্যমান":"You are visible to seekers"):(LANG==="bn"?"অনুসন্ধান থেকে লুকানো":"Hidden from search"))).catch(fe);
 let view="home",pos=null,F={g:"",d:"",compat:true,avail:true,r:0,mode:"list"};
 let mapView=null,dirView=null,MAPS=[],LOC={d:null,r:null,f:null},DF={q:"",type:"",d:"",h24:false,mode:"list",add:false};
+let AV={tab:"overview",dq:"",rq:""};
+function setAV(k,v){AV[k]=v;render()}
 const EM={"Blood Bank":"🩸",Hospital:"🏥","Voluntary Org":"🤝"},TYPES=Object.keys(EM);
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -392,12 +433,12 @@ const matches=(g,d,ref)=>{const l=S.donors.filter(x=>CAN[g].includes(x.g)&&x.av&
 const opts=(a,sel,ph)=>(ph?`<option value="">${ph}</option>`:"")+a.map(x=>`<option ${x===sel?"selected":""}>${x}</option>`).join("");
 const TABS=[["home","nav_home"],["find","nav_find"],["emergency","nav_emergency"],["directory","nav_directory"],["profile","nav_profile"]];
 const NAVICONS={home:"🏠",find:"🔍",emergency:"➕",directory:"🏥",profile:"👤"};
-function go(v){view=v;location.hash=v;render();scrollTo({top:0,behavior:"smooth"})}
+function go(v){view=v;location.hash=v;render();const el=$("#app");el.classList.remove("page-in");void el.offsetWidth;el.classList.add("page-in");scrollTo({top:0,behavior:"smooth"})}
 document.documentElement.lang=LANG;
 function render(){
   const keep={};
   document.querySelectorAll("#app input[id],#app select[id],#app textarea[id]").forEach(e=>{keep[e.id]=e.type==="checkbox"?e.checked:e.value});
-  $("#app").innerHTML=!CONFIGURED?setup():!user?authView():({home,find,emergency,directory,profile}[view]||home)();
+  $("#app").innerHTML=!CONFIGURED?setup():!user?authView():({home,find,emergency,directory,profile,admin}[view]||home)();
   Object.entries(keep).forEach(([id,val])=>{const e=document.getElementById(id);if(!e)return;if(e.type==="checkbox")e.checked=val;else if(e.tagName!=="SELECT"||[...e.options].some(o=>o.value===val))e.value=val});
   $("#footer").innerHTML=t("footer");
   renderBottomNav();
@@ -411,6 +452,8 @@ function renderBottomNav(){
   el.style.display="flex";
   el.innerHTML=`<div class="barin">${TABS.map(([k,l])=>`<button class="${k==="emergency"?"mid ":""}${view===k?"on":""}" onclick="go('${k}')"><span class="ico">${NAVICONS[k]}</span><span class="lbl">${t(l)}</span></button>`).join("")}</div>`;
 }
+function emptyState(msg){return `<div class="empty card"><svg class="empty-ico" viewBox="0 0 120 120" width="72" height="72"><circle cx="60" cy="60" r="46" fill="none" stroke="var(--bd)" stroke-width="3" stroke-dasharray="6 8"/><path d="M60 34c0 0-22 26-22 40a22 22 0 0 0 44 0c0-14-22-40-22-40z" fill="color-mix(in srgb,var(--ac) 16%,transparent)" stroke="var(--ac)" stroke-width="2.5"/></svg><p>${msg}</p></div>`}
+function skeletonGrid(n){return `<div class="grid">${Array(n).fill(`<div class="card skel"><div class="row"><div class="sk sk-c"></div><div style="flex:1"><div class="sk sk-l1"></div><div class="sk sk-l2"></div></div></div><div class="sk sk-l3"></div><div class="acts"><div class="sk sk-btn"></div><div class="sk sk-btn"></div></div></div>`).join("")}</div>`}
 function donorCard(x){
   const dist=pos?km(pos,coord(x)):null,ok=eligible(x);
   return `<div class="card listcard"><div class="row"><div class="bg">${x.g}</div><div><b>${esc(x.name)}</b><br><span class="pill ${x.av&&ok?"":"no"}">${x.av&&ok?t("avail"):ok?t("unavail"):t("rests",90-x.last)}</span></div></div>
@@ -421,7 +464,7 @@ function home(){
   const cnt=G.map(g=>[g,S.donors.filter(d=>d.g===g).length]),mx=Math.max(...cnt.map(c=>c[1]),1);
   return `<section class="hero"><div><span class="pill crit">${t("hero_pill")}</span><h1 style="margin-top:14px">${t("hero_h1a")}<span>${t("hero_h1b")}</span>${t("hero_h1c")}</h1>
   <p class="lead">${t("hero_lead")}</p>
-  <div class="stats"><div class="stat"><b>${n}</b><small>${t("stat_donors")}</small></div><div class="stat"><b>${av}</b><small>${t("stat_ready")}</small></div><div class="stat"><b>${op}</b><small>${t("stat_open")}</small></div><div class="stat"><b>${S.reqs.reduce((a,r)=>a+r.resp,0)}</b><small>${t("stat_resp")}</small></div></div></div>
+  <div class="stats"><div class="stat"><b data-count="${n}">0</b><small>${t("stat_donors")}</small></div><div class="stat"><b data-count="${av}">0</b><small>${t("stat_ready")}</small></div><div class="stat"><b data-count="${op}">0</b><small>${t("stat_open")}</small></div><div class="stat"><b data-count="${S.reqs.reduce((a,r)=>a+r.resp,0)}">0</b><small>${t("stat_resp")}</small></div></div></div>
   <div class="hero-art" aria-hidden="true"><svg viewBox="0 0 380 380">
   <defs><linearGradient id="dropG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--ac2)"/><stop offset="1" style="stop-color:var(--ac)"/></linearGradient></defs>
   <circle class="blob b1" cx="190" cy="195" r="150"/><circle class="blob b2" cx="262" cy="118" r="86"/>
@@ -449,7 +492,7 @@ function find(){
   <div class="acts"><label style="display:flex;gap:7px;align-items:center;margin:0"><input type="checkbox" style="width:auto" ${F.compat?"checked":""} onchange="setF('compat',this.checked)"> ${t("incl_compat")}</label>
   <label style="display:flex;gap:7px;align-items:center;margin:0"><input type="checkbox" style="width:auto" ${F.avail?"checked":""} onchange="setF('avail',this.checked)"> ${t("only_avail")}</label></div></div>
   <div class="row" style="justify-content:space-between;margin-bottom:14px"><p class="sub" style="margin:0"><b>${l.length}</b> ${t("found")}</p><div class="acts"><button class="btn sm ${F.mode==="map"?"gh":""}" onclick="setF('mode','list')">${t("list")}</button><button class="btn sm ${F.mode==="map"?"":"gh"}" onclick="setF('mode','map')">${t("map")}</button></div></div>
-  ${F.mode==="map"?`<div id="findmap" class="map"></div><p class="meta">${t("map_legend")}</p>`:(l.length?`<div class="grid">${l.map(donorCard).join("")}</div>`:`<div class="empty card">${t("no_match")}</div>`)}`}
+  ${F.mode==="map"?`<div id="findmap" class="map"></div><p class="meta">${t("map_legend")}</p>`:(!S.loaded.donors?skeletonGrid(6):(l.length?`<div class="grid">${l.map(donorCard).join("")}</div>`:emptyState(t("no_match"))))}`}
 function loc(){
   if(!navigator.geolocation)return toast("Geolocation is not supported on this device");
   toast("Getting your location…");
@@ -462,7 +505,18 @@ function useGps(key){
 }
 const pin=(t,c="")=>L.divIcon({className:"",html:`<div class="pin ${c}"><span>${t}</span></div>`,iconSize:[34,34],iconAnchor:[17,34],popupAnchor:[0,-32]});
 const tiles=m=>L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}).addTo(m);
+function animateCount(el,target,dur){
+  dur=dur||700;
+  const start=performance.now(),loc=LANG==="bn"?"bn-BD":"en-US";
+  function step(now){
+    const p=Math.min(1,(now-start)/dur),eased=1-Math.pow(1-p,3);
+    el.textContent=Math.round(target*eased).toLocaleString(loc);
+    if(p<1)requestAnimationFrame(step);else el.textContent=target.toLocaleString(loc);
+  }
+  requestAnimationFrame(step);
+}
 function afterRender(){
+  document.querySelectorAll("[data-count]").forEach(el=>{const n=parseInt(el.dataset.count,10);if(!isNaN(n))animateCount(el,n)});
   MAPS.forEach(m=>m.remove());MAPS=[];
   if(typeof L==="undefined"||!user)return;
   const a=$("#findmap");if(a)drawFind(a);
@@ -530,7 +584,7 @@ function directory(){
   <label style="display:flex;gap:7px;align-items:center;margin:0"><input type="checkbox" style="width:auto" ${DF.h24?"checked":""} onchange="setD('h24',this.checked)"> ${t("h24_only")}</label></div>
   <div class="row" style="justify-content:space-between;margin-bottom:14px;flex-wrap:wrap"><p class="sub" style="margin:0"><b>${l.length}</b> ${t("listing")}</p><div class="acts"><button class="btn sm ${DF.mode==="map"?"gh":""}" onclick="setD('mode','list')">${t("list")}</button><button class="btn sm ${DF.mode==="map"?"":"gh"}" onclick="setD('mode','map')">${t("map")}</button><button class="btn sm gh" onclick="setD('add',!DF.add)">${DF.add?t("cancel_add"):t("add_fac")}</button></div></div>
   ${DF.add?facForm():""}
-  ${DF.mode==="map"?`<div id="dirmap" class="map"></div><p class="meta">${t("map_only")}</p>`:(l.length?`<div class="grid">${l.map(facCard).join("")}</div>`:`<div class="empty card">${t("no_listings")}</div>`)}`}
+  ${DF.mode==="map"?`<div id="dirmap" class="map"></div><p class="meta">${t("map_only")}</p>`:(!S.loaded.facs?skeletonGrid(6):(l.length?`<div class="grid">${l.map(facCard).join("")}</div>`:emptyState(t("no_listings"))))}`}
 function drawDir(el){
   const m=L.map(el).setView(pos||DIST.Dhaka,pos?11:7);MAPS.push(m);tiles(m);const pts=[];
   dirList().forEach(f=>{const c=facCoord(f);if(!c)return;pts.push(c);
@@ -557,6 +611,66 @@ function saveStock(id){
 }
 const verifyFac=(id,v)=>updateDoc(doc(db,"facilities",id),{verified:v}).then(()=>toast(v?"Marked verified":"Verification removed")).catch(fe);
 const delFac=id=>{if(confirm("Delete this listing?"))deleteDoc(doc(db,"facilities",id)).then(()=>toast("Listing deleted")).catch(fe)};
+function admin(){
+  if(!isAdmin)return home();
+  const donors=S.donors,reqs=S.reqs,facs=S.facs;
+  const av=donors.filter(d=>d.av&&eligible(d)).length,op=reqs.filter(r=>!r.done).length;
+  const pend=facs.filter(f=>!f.verified),ver=facs.filter(f=>f.verified);
+  const resp=reqs.reduce((a,r)=>a+r.resp,0);
+  const cnt=G.map(g=>[g,donors.filter(d=>d.g===g).length]),mx=Math.max(...cnt.map(c=>c[1]),1);
+  const tabs=[["overview","admin_tab_overview"],["donors","admin_tab_donors"],["requests","admin_tab_requests"],["facilities","admin_tab_facilities"]];
+  const body=AV.tab==="donors"?adminDonorsSection(donors):AV.tab==="requests"?adminRequestsSection(reqs):AV.tab==="facilities"?adminFacSection(pend,ver):`
+  <div class="admin-stats">
+  <div class="stat"><b data-count="${donors.length}">0</b><small>${t("admin_stat_donors")}</small></div>
+  <div class="stat"><b data-count="${av}">0</b><small>${t("admin_stat_avail")}</small></div>
+  <div class="stat"><b data-count="${op}">0</b><small>${t("admin_stat_open")}</small></div>
+  <div class="stat"><b data-count="${pend.length}">0</b><small>${t("admin_stat_pending")}</small></div>
+  <div class="stat"><b data-count="${ver.length}">0</b><small>${t("admin_stat_verified")}</small></div>
+  <div class="stat"><b data-count="${resp}">0</b><small>${t("admin_stat_resp")}</small></div>
+  </div>
+  <div class="card"><h3 style="margin:0 0 14px">${t("admin_by_group")}</h3><div class="bars">${cnt.map(([g,c])=>`<div class="bar2"><span>${g}</span><i style="width:${Math.max(6,c/mx*100)}%"></i><span>${c}</span></div>`).join("")}</div></div>`;
+  return `<h2>${t("admin_h")}</h2><p class="sub">${t("admin_sub")}</p>
+  <div class="admin-tabs">${tabs.map(([k,l])=>`<button class="btn sm ${AV.tab===k?"":"gh"}" onclick="setAV('tab','${k}')">${t(l)}</button>`).join("")}</div>
+  ${body}`;
+}
+function adminDonorsSection(donors){
+  const q=(AV.dq||"").toLowerCase();
+  const l=donors.filter(d=>!q||(d.name||"").toLowerCase().includes(q)||(d.ph||"").includes(q)||(d.d||"").toLowerCase().includes(q));
+  return `<div class="card" style="margin-bottom:14px"><input placeholder="${t("admin_search_donor")}" value="${esc(AV.dq||"")}" oninput="setAV('dq',this.value)"></div>
+  <div class="grid">${l.map(adminDonorRow).join("")||emptyState(t("admin_no_donors"))}</div>`;
+}
+function adminDonorRow(x){
+  return `<div class="card listcard"><div class="row"><div class="bg">${x.g}</div><div style="flex:1"><b>${esc(x.name)}</b><br><span class="meta" style="margin:0">📍 ${esc(x.d)} · 📞 ${esc(x.ph)}</span></div></div>
+  <div class="acts" style="margin-top:10px"><span class="pill ${x.av?"":"no"}">${x.av?t("avail"):t("unavail")}</span><a class="btn sm gh" style="text-decoration:none;margin-left:auto" href="tel:${esc(x.ph)}">${t("call")}</a><button class="btn sm gh" onclick="adminDelDonor('${x.id}','${esc(x.name).replace(/'/g,"\\'")}')">🗑 ${t("del")}</button></div></div>`;
+}
+function adminDelDonor(uid,name){
+  if(!confirm(t("admin_confirm_del_donor").replace("{n}",name)))return;
+  deleteDoc(doc(db,"donors",uid)).then(()=>toast(t("admin_deleted"))).catch(fe);
+}
+function adminRequestsSection(reqs){
+  const q=(AV.rq||"").toLowerCase();
+  const l=[...reqs].filter(r=>!q||(r.pt||"").toLowerCase().includes(q)||(r.h||"").toLowerCase().includes(q)).sort((a,b)=>(a.done?1:0)-(b.done?1:0)||b.t-a.t);
+  return `<div class="card" style="margin-bottom:14px"><input placeholder="${t("admin_search_req")}" value="${esc(AV.rq||"")}" oninput="setAV('rq',this.value)"></div>
+  <div style="display:grid;gap:12px">${l.map(adminReqRow).join("")||emptyState(t("admin_no_reqs"))}</div>`;
+}
+function adminReqRow(r){
+  return `<div class="card listcard" style="${r.done?"opacity:.6":""}"><div class="row"><div class="bg">${r.g}</div><div style="flex:1"><b>${esc(r.pt)}</b><br><span class="pill ${r.urg==="critical"?"crit":r.urg==="urgent"?"urg":""}">${r.urg}</span> <span class="meta">${ago(r.t)}</span></div></div>
+  <div class="meta">🏥 ${esc(r.h)}, ${esc(r.d)}<br>🩸 ${r.u} bag${r.u>1?"s":""} · 👥 ${r.resp} ${t("responded")}</div>
+  <div class="acts">${r.done?`<button class="btn sm gh" onclick="adminToggleReq('${r.id}',false)">↺ ${t("admin_reopen")}</button>`:`<button class="btn sm gh" onclick="adminToggleReq('${r.id}',true)">✓ ${t("admin_mark_done")}</button>`}<button class="btn sm gh" onclick="adminDelReq('${r.id}')">🗑 ${t("del")}</button></div></div>`;
+}
+function adminToggleReq(id,done){updateDoc(doc(db,"requests",id),{done}).then(()=>toast(done?t("admin_marked_done"):t("admin_reopened"))).catch(fe)}
+function adminDelReq(id){if(!confirm(t("admin_confirm_del_req")))return;deleteDoc(doc(db,"requests",id)).then(()=>toast(t("admin_deleted"))).catch(fe)}
+function adminFacSection(pend,ver){
+  return `<div class="sechead" style="margin-top:0">⚠ ${t("admin_pending_review")} (${pend.length})</div>
+  <div class="grid">${pend.map(adminFacRow).join("")||emptyState(t("admin_no_pending"))}</div>
+  <div class="sechead">${t("admin_verified_list")} (${ver.length})</div>
+  <div class="grid">${ver.map(adminFacRow).join("")||emptyState(t("admin_no_verified"))}</div>`;
+}
+function adminFacRow(f){
+  return `<div class="card listcard ${f.verified?"":"pending-row"}"><div class="row"><div class="bg" style="background:linear-gradient(135deg,#4d8dff,#1b4fd8);font-size:22px">${EM[f.type]||"🏥"}</div><div style="flex:1"><b>${esc(f.name)}</b><br><span class="pill ${f.verified?"":"no"}">${f.verified?t("verified"):t("unverified")}</span> <span class="pill no">${esc(f.type)}</span></div></div>
+  <div class="meta">📍 ${esc(f.d||"")}${f.addr?" · "+esc(f.addr):""}${f.ph?"<br>📞 "+esc(f.ph):""}</div>
+  <div class="acts"><button class="btn sm gh" onclick="verifyFac('${f.id}',${!f.verified})">${f.verified?t("unverify"):t("verify")}</button><button class="btn sm gh" onclick="delFac('${f.id}')">🗑 ${t("del")}</button></div></div>`;
+}
 // ================= /Directory =================
 function emergency(){
   const l=[...S.reqs].sort((a,b)=>a.done-b.done||b.t-a.t);
@@ -570,7 +684,7 @@ function emergency(){
   <div class="full"><label>${t("lbl_req_loc")}</label><div class="acts" style="margin-bottom:8px"><button type="button" class="btn sm gh" onclick="useGps('r')">${t("use_gps")}</button><span class="meta" id="r_locmsg" style="margin:0;align-self:center">${LOC.r?t("loc_set"):t("tap_map")}</span></div><div id="reqmap" class="map" style="height:220px"></div></div>
   <div class="full"><label>${t("lbl_note")}</label><textarea id="r_n" rows="2"></textarea></div>
   <div class="full"><button class="btn" style="width:100%" onclick="postReq()">${t("broadcast")}</button></div></div></div>
-  <div style="display:grid;gap:12px;align-content:start">${l.map(reqCard).join("")||`<div class="empty card">${t("no_reqs")}</div>`}</div></div>`}
+  <div style="display:grid;gap:12px;align-content:start">${l.map(reqCard).join("")||emptyState(t("no_reqs"))}</div></div>`}
 function reqCard(r){
   const m=matches(r.g,r.d,r),msg=encodeURIComponent(`🚨 Blood needed: ${r.g} (${r.u} bag) at ${r.h}, ${r.d}. Contact: ${r.ph}. Please share.`);
   return `<div class="card listcard" style="${r.done?"opacity:.55":""}"><div class="row"><div class="bg">${r.g}</div><div style="flex:1"><b>${esc(r.pt)}</b><br><span class="pill ${r.urg==="critical"?"crit":r.urg==="urgent"?"urg":""}">${r.urg}</span> <span class="meta">${ago(r.t)}</span></div></div>
@@ -652,13 +766,13 @@ function profile(){
   <button class="setrow" onclick="toggleTheme()"><span class="picon">◐</span><span class="stxt">${t("settings_theme")}</span><span class="chev">›</span></button>
   ${deferredInstall?`<button class="setrow" onclick="doInstall()"><span class="picon">⬇</span><span class="stxt">${t("settings_install")}</span><span class="chev">›</span></button>`:""}
   <button class="setrow" onclick="pwReset()"><span class="picon">🔑</span><span class="stxt">${t("settings_pw")}</span><span class="chev">›</span></button>
-  ${isAdmin?`<div class="prow"><div class="picon">🛡</div><span class="meta" style="margin:0">${t("settings_admin")}</span></div>`:""}
+  ${isAdmin?`<button class="setrow" onclick="go('admin')"><span class="picon si">🛡</span><span class="stxt">${t("admin_open")}</span><span class="chev">›</span></button>`:""}
   <button class="setrow" onclick="delMe()"><span class="picon" style="background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)">🗑</span><span class="stxt">${t("settings_remove")}</span><span class="chev">›</span></button>
   <button class="setrow" style="color:var(--ac);border-bottom:0" onclick="signOutU()"><span class="picon" style="background:color-mix(in srgb,var(--ac) 12%,transparent);color:var(--ac)">⏻</span><span class="stxt">${t("signout")}</span><span class="chev">›</span></button>
   </div>
   <p class="meta" style="margin-top:10px;text-align:center">${t("settings_about")}</p>
   </div>
-  <div class="profwrap" style="display:grid;gap:12px;max-width:640px;margin:0 auto"><h3 style="margin:0">${t("my_reqs")}</h3>${my.map(reqCard).join("")||`<div class="empty card">${t("no_my_reqs")}</div>`}</div>`
+  <div class="profwrap" style="display:grid;gap:12px;max-width:640px;margin:0 auto"><h3 style="margin:0">${t("my_reqs")}</h3>${my.map(reqCard).join("")||emptyState(t("no_my_reqs"))}</div>`
 }
 function editProfileView(){
   if(S.me&&S.me.lat!=null&&!LOC.d)LOC.d=[S.me.lat,S.me.lng];
@@ -692,9 +806,9 @@ async function pwReset(){
   if(!user||!user.email||user.email.endsWith("@phone.roktosetu.app"))return toast(t("settings_pw_nomail"));
   try{await sendPasswordResetEmail(auth,user.email);toast(t("settings_pw_sent"))}catch(x){ae(x)}
 }
-view=(location.hash||"#home").slice(1);if(!TABS.some(t=>t[0]===view))view="home";
-addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h!==view&&TABS.some(t=>t[0]===h)){view=h;render()}});
-Object.assign(window,{go,chart,loc,postReq,respond,fulfil,matchList,closeM,regDonor,delMe,toggleAv,setMode,doLogin,doRegister,forgot,googleIn,signOutU,setF,useGps,setD,goDir,addFac,stockM,saveStock,verifyFac,delFac,doInstall,F,render,setProfileEdit,openSettings,toggleTheme,pwReset,uploadAvatar,showUpdated});
+view=(location.hash||"#home").slice(1);if(!TABS.some(t=>t[0]===view)&&view!=="admin")view="home";
+addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h!==view&&(TABS.some(t=>t[0]===h)||h==="admin")){view=h;render()}});
+Object.assign(window,{go,chart,loc,postReq,respond,fulfil,matchList,closeM,regDonor,delMe,toggleAv,setMode,doLogin,doRegister,forgot,googleIn,signOutU,setF,useGps,setD,goDir,addFac,stockM,saveStock,verifyFac,delFac,doInstall,F,render,setProfileEdit,openSettings,toggleTheme,pwReset,uploadAvatar,showUpdated,setAV,adminDelDonor,adminToggleReq,adminDelReq});
 
 // ---- PWA install prompt ----
 let deferredInstall=null;
@@ -711,7 +825,7 @@ if("serviceWorker" in navigator && location.hostname!=="localhost" && location.p
   addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));
 }
 if(CONFIGURED){app=initializeApp(firebaseConfig);try{getAnalytics(app)}catch(e){}auth=getAuth(app);db=getFirestore(app);
-  onAuthStateChanged(auth,u=>{user=u;unsubs.forEach(f=>f());unsubs=[];S={donors:[],reqs:[],facs:[],me:null};isAdmin=false;if(u){listen();getDoc(doc(db,"admins",u.uid)).then(d=>{isAdmin=d.exists();render()}).catch(()=>{})}render()})}
+  onAuthStateChanged(auth,u=>{user=u;unsubs.forEach(f=>f());unsubs=[];S={donors:[],reqs:[],facs:[],me:null,loaded:{donors:false,reqs:false,facs:false}};isAdmin=false;if(u){listen();getDoc(doc(db,"admins",u.uid)).then(d=>{isAdmin=d.exists();render()}).catch(()=>{})}render()})}
 render();
 </script>
 </body>
