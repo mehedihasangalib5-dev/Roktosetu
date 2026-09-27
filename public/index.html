@@ -228,6 +228,36 @@ footer{margin:50px 0 30px;color:var(--mut);font-size:13px;text-align:center}
 .leaflet-popup-content a{color:#d4213a;font-weight:700}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .leaflet-tile{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9)}}
 :root[data-theme="dark"] .leaflet-tile{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9)}
+
+/* ===== Premium profile redesign ===== */
+.pcard-lux{border:1px solid color-mix(in srgb,var(--ac) 16%,var(--bd));box-shadow:0 1px 2px rgba(120,20,35,.05),0 34px 64px -22px rgba(120,20,35,.24)}
+.pbanner-lux{height:92px;background:radial-gradient(130% 220% at 0% -10%,rgba(255,255,255,.4),transparent 55%),radial-gradient(100% 160% at 105% -20%,rgba(255,255,255,.22),transparent 60%),linear-gradient(120deg,var(--ac) 0%,var(--ac2) 52%,#ffb020 125%)}
+.pbanner-lux:after{background-size:20px 20px;opacity:.3}
+.pbanner .lux-ribbon{position:absolute;top:10px;right:12px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:center;font-size:14px;border:1px solid rgba(255,255,255,.4);box-shadow:0 4px 10px rgba(0,0,0,.15)}
+.pcard-head-lux{margin-top:-42px}
+.avwrap-lux.ring{width:88px;height:88px}
+.avwrap-lux.ring img,.avwrap-lux.ring .bg{width:76px;height:76px;left:6px;top:6px;font-size:25px;border-width:3.5px}
+.pill-lux{background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 88%,#ffb020),var(--ac));box-shadow:0 6px 16px rgba(212,33,58,.32),inset 0 1px 0 rgba(255,255,255,.25)}
+.stat-strip{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.stat-chip{background:var(--bg);border:1px solid var(--bd);border-radius:14px;padding:11px 10px;text-align:center;transition:transform .18s cubic-bezier(.2,.8,.2,1),border-color .18s,box-shadow .18s}
+.stat-chip:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--ac) 35%,var(--bd));box-shadow:0 10px 22px rgba(120,20,35,.1)}
+.stat-chip b{display:block;font-size:19px;letter-spacing:-.3px;color:var(--ac)}
+.stat-chip small{color:var(--mut);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.info-tile{position:relative}
+.info-tile:hover{border-color:color-mix(in srgb,var(--ac) 40%,var(--bd));box-shadow:0 8px 18px rgba(120,20,35,.08);transform:translateY(-1px)}
+.info-tile:hover .fc-ico{transform:scale(1.08) rotate(-4deg)}
+.fc-ico{transition:transform .2s cubic-bezier(.2,.8,.2,1)}
+.settings-card{background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 3%,var(--card)),var(--card))}
+.settings-card .setrow{border-radius:12px}
+.settings-card .setrow:hover{transform:translateX(2px)}
+.section-head-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:2px}
+.count-badge{background:color-mix(in srgb,var(--ac) 14%,transparent);color:var(--ac);font-size:12px;font-weight:800;padding:3px 11px;border-radius:99px;flex:none}
+@media(max-width:400px){
+  .pbanner-lux{height:78px}
+  .pcard-head-lux{margin-top:-34px}
+  .avwrap-lux.ring{width:76px;height:76px}
+  .avwrap-lux.ring img,.avwrap-lux.ring .bg{width:64px;height:64px;font-size:22px}
+}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -756,28 +786,31 @@ function profile(){
   return `<h2 style="margin-bottom:2px">${t("welcome")}, ${esc((m.name||"").split(" ")[0])}</h2>
   <p class="sub" style="margin-top:0">${new Date().toLocaleDateString(LANG==="bn"?"bn-BD":"en-US",{weekday:"short",day:"2-digit",month:"long",year:"numeric"})}</p>
   <div class="profwrap" style="max-width:640px;margin:0 auto 16px">
-  <div class="card pcard">
-  <div class="pbanner"></div>
+  <div class="card pcard pcard-lux">
+  <div class="pbanner pbanner-lux"><span class="lux-ribbon" title="${t("nav_profile")}">💎</span></div>
   <div class="pcard-body">
-  <div class="pcard-head">
-  <div class="avwrap ring">
+  <div class="pcard-head pcard-head-lux">
+  <div class="avwrap ring avwrap-lux">
   <svg class="aring" viewBox="0 0 80 80"><circle class="ring-bg" cx="40" cy="40" r="36"/><circle class="ring-fg" cx="40" cy="40" r="36" style="stroke:${eligible(m)?"var(--ok)":"var(--ac)"}" stroke-dasharray="${(2*Math.PI*36).toFixed(1)}" stroke-dashoffset="${(2*Math.PI*36*(1-(eligible(m)?1:Math.min(1,m.last/90)))).toFixed(1)}"/></svg>
   ${avatarHTML(photo,m.g,68)}<button class="cam" title="${t("change_photo")}" onclick="$('#avatarInput').click()">📷</button></div>
-  <div class="pcard-id"><b style="font-size:17px">${esc(m.name)}</b><div class="donor-id">${t("donor_id")} : ${user.uid.slice(-10).toUpperCase()}</div></div>
+  <div class="pcard-id"><b style="font-size:18px;letter-spacing:-.2px">${esc(m.name)}</b><div class="donor-id">${t("donor_id")} : ${user.uid.slice(-10).toUpperCase()}</div></div>
   <button class="btn sm gh" onclick="setProfileEdit(true)">✏️ ${t("edit_profile2")}</button>
   </div>
-  <span class="pill verified" style="margin-top:10px">${eligible(m)?`<span class="chk">✓</span>`:"⏳"}🩸 ${m.g} · ${eligible(m)?t("eligible_now"):t("next_eligible",90-m.last)}</span>
-  <div class="stats" style="margin-top:10px;gap:8px"><div class="stat compact"><b>${my.length}</b><small>${t("my_stats_req")}</small></div><div class="stat compact"><b style="font-size:16px">${eligible(m)?"✅":"⏳"}</b><small>${t("my_stats_elig")}</small></div></div>
-  <div class="fields-grid" style="margin-top:12px">
-  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,var(--ac) 15%,transparent);color:var(--ac)">🩸</div><div class="fc-body"><span class="fl">${t("lbl_group")}</span><b>${m.g}</b></div></div>
-  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,#2f6fed 15%,transparent);color:#2f6fed">📞</div><div class="fc-body"><span class="fl">${t("lbl_phone")}</span><b>${esc(m.ph)}</b></div></div>
-  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)">📍</div><div class="fc-body"><span class="fl">${t("lbl_district")}</span><b>${m.d}</b></div></div>
-  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,#9b5de5 15%,transparent);color:#9b5de5">👁</div><div class="fc-body"><span class="fl">${t("show_avail")}</span><b>${m.av?t("avail"):t("unavail")}</b></div><label class="sw"><input type="checkbox" ${m.av?"checked":""} onchange="toggleAv(this.checked)"><i></i></label></div>
+  <span class="pill verified pill-lux" style="margin-top:12px">${eligible(m)?`<span class="chk">✓</span>`:"⏳"}🩸 ${m.g} · ${eligible(m)?t("eligible_now"):t("next_eligible",90-m.last)}</span>
+  <div class="stat-strip">
+  <div class="stat-chip"><b>${my.length}</b><small>${t("my_stats_req")}</small></div>
+  <div class="stat-chip"><b style="font-size:17px">${eligible(m)?"✅":"⏳"}</b><small>${t("my_stats_elig")}</small></div>
+  </div>
+  <div class="fields-grid fields-grid-lux" style="margin-top:12px">
+  <div class="field-card info-tile"><div class="fc-ico" style="background:color-mix(in srgb,var(--ac) 15%,transparent);color:var(--ac)">🩸</div><div class="fc-body"><span class="fl">${t("lbl_group")}</span><b>${m.g}</b></div></div>
+  <div class="field-card info-tile"><div class="fc-ico" style="background:color-mix(in srgb,#2f6fed 15%,transparent);color:#2f6fed">📞</div><div class="fc-body"><span class="fl">${t("lbl_phone")}</span><b>${esc(m.ph)}</b></div></div>
+  <div class="field-card info-tile"><div class="fc-ico" style="background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)">📍</div><div class="fc-body"><span class="fl">${t("lbl_district")}</span><b>${m.d}</b></div></div>
+  <div class="field-card info-tile"><div class="fc-ico" style="background:color-mix(in srgb,#9b5de5 15%,transparent);color:#9b5de5">👁</div><div class="fc-body"><span class="fl">${t("show_avail")}</span><b>${m.av?t("avail"):t("unavail")}</b></div><label class="sw"><input type="checkbox" ${m.av?"checked":""} onchange="toggleAv(this.checked)"><i></i></label></div>
   </div>
   </div>
   </div>
   <div class="sechead">${t("settings_h")}</div>
-  <div class="card" style="text-align:left;padding:6px 14px">
+  <div class="card settings-card" style="text-align:left;padding:6px 14px">
   <button class="setrow" onclick="setLang(LANG==='bn'?'en':'bn')"><span class="picon" style="background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)">🌐</span><span class="stxt">${t("settings_lang")}</span><span class="chev">${LANG==="bn"?"বাংলা":"English"} ›</span></button>
   <button class="setrow" onclick="toggleTheme()"><span class="picon" style="background:color-mix(in srgb,var(--warn) 15%,transparent);color:var(--warn)">◐</span><span class="stxt">${t("settings_theme")}</span><span class="chev">›</span></button>
   ${deferredInstall?`<button class="setrow" onclick="doInstall()"><span class="picon" style="background:color-mix(in srgb,#2f6fed 15%,transparent);color:#2f6fed">⬇</span><span class="stxt">${t("settings_install")}</span><span class="chev">›</span></button>`:""}
@@ -788,7 +821,7 @@ function profile(){
   </div>
   <p class="meta" style="margin-top:10px;text-align:center">${t("settings_about")}</p>
   </div>
-  <div class="profwrap" style="display:grid;gap:12px;max-width:640px;margin:0 auto"><h3 style="margin:0">${t("my_reqs")}</h3>${my.map(reqCard).join("")||emptyState(t("no_my_reqs"))}</div>`
+  <div class="profwrap" style="display:grid;gap:12px;max-width:640px;margin:0 auto"><div class="section-head-row"><h3 style="margin:0">${t("my_reqs")}</h3>${my.length?`<span class="count-badge">${my.length}</span>`:""}</div>${my.map(reqCard).join("")||emptyState(t("no_my_reqs"))}</div>`
 }
 function editProfileView(){
   if(S.me&&S.me.lat!=null&&!LOC.d)LOC.d=[S.me.lat,S.me.lng];
