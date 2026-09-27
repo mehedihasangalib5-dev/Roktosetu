@@ -50,6 +50,13 @@ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 }
 .avwrap{position:relative;width:76px;height:76px;margin:0 auto 10px}
 .avwrap img,.avwrap .bg{width:76px;height:76px;border-radius:50%;object-fit:cover;font-size:26px;border:3px solid var(--card);box-shadow:var(--sh)}
+.avwrap.ring{width:80px;height:80px}
+.avwrap.ring img,.avwrap.ring .bg{position:absolute;left:6px;top:6px;width:68px;height:68px;font-size:23px}
+.avwrap.ring .aring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.avwrap.ring .aring circle{fill:none;stroke-width:5}
+.avwrap.ring .aring .ring-bg{stroke:var(--bd)}
+.avwrap.ring .aring .ring-fg{stroke-linecap:round;transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1)}
+.avwrap.ring .cam{right:-6px;bottom:-4px}
 .avwrap .cam{position:absolute;right:-3px;bottom:-2px;width:27px;height:27px;border-radius:50%;background:linear-gradient(135deg,var(--ac2),var(--ac));color:#fff;display:grid;place-items:center;font-size:12px;border:2.5px solid var(--bg);cursor:pointer;box-shadow:0 4px 10px rgba(212,33,58,.4);transition:.18s cubic-bezier(.2,.8,.2,1)}
 .avwrap .cam:hover{transform:scale(1.12);box-shadow:0 6px 16px rgba(212,33,58,.55)}
 .avwrap .cam:active{transform:scale(.92)}
@@ -87,13 +94,16 @@ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 .pcard{padding:0;overflow:hidden;text-align:left}
 .pbanner{height:58px;background:linear-gradient(120deg,var(--ac) 0%,var(--ac2) 55%,#ffb020 100%);position:relative;overflow:hidden}
 .pbanner:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.35) 0%,transparent 30%,transparent 70%,rgba(255,255,255,.15) 100%)}
+.pbanner:after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.5) 1px,transparent 1.5px);background-size:16px 16px;opacity:.35}
 .pcard-body{padding:0 14px 14px}
-.pcard-head{display:flex;align-items:flex-end;gap:10px;margin-top:-32px;flex-wrap:wrap}
+.pcard-head{display:flex;align-items:flex-end;gap:10px;margin-top:-34px;flex-wrap:wrap}
 .pcard-head .avwrap{margin:0;flex:none}
 .pcard-id{flex:1;min-width:0;padding-bottom:2px}
 .pcard-head .btn{flex:none;align-self:flex-start;margin-top:8px}
 .fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.field-card{background:var(--bg);border:1px solid var(--bd);border-radius:12px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;gap:6px;transition:.18s}
+.field-card{background:var(--bg);border:1px solid var(--bd);border-radius:12px;padding:9px 11px;display:flex;align-items:center;gap:9px;transition:.18s}
+.fc-ico{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:14px;flex:none}
+.fc-body{flex:1;min-width:0}
 .field-card .fl{display:block;font-size:10.5px;color:var(--mut);font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px}
 .field-card b{font-size:13px;font-weight:700}
 .field-card:hover{border-color:color-mix(in srgb,var(--ac) 40%,var(--bd))}
@@ -264,7 +274,7 @@ en:{
  avail:"Available",unavail:"Unavailable",rests:"Rests {n}d",last_donated:"Last donated {n} days ago",away:"km away",call:"Call",whatsapp:"WhatsApp",
  emg_h:"🚨 Emergency requests",emg_sub:"Broadcast a request; compatible donors in the district are matched instantly.",
  post_req:"Post a request",lbl_patient:"Patient name",ph_patient:"Patient / attendant name",lbl_group:"Blood group",lbl_units:"Units (bags)",
- lbl_hospital:"Hospital",ph_hospital:"Hospital name & ward",lbl_urgency:"Urgency",urg_critical:"Critical (now)",urg_urgent:"Urgent (today)",urg_planned:"Planned",
+ lbl_hospital:"Hospital",ph_hospital:"Hospital name & ward",lbl_urgency:"Urgency",urg_critical:"Critical (now)",urg_urgent:"Urgent (today)",urg_planned:"Planned",lbl_need_by:"Needed by (date) — optional",need_by:"Needed by",lbl_time:"Time — optional",
  lbl_phone:"Contact phone",lbl_note:"Note (optional)",broadcast:"Broadcast request",lbl_req_loc:"Patient / hospital location (optional — helps nearby donors find you)",
  use_gps:"📍 Use my current location",loc_set:"✓ Location set — drag the pin to adjust",tap_map:"Tap the map to set the location",
  no_reqs:"No requests yet.",matching:"matching donors",responded:"responded",fulfilled:"Fulfilled ✓",i_can_donate:"I can donate",share:"Share",matches_btn:"Matches",banks_btn:"🏥 Blood banks",mark_fulfilled:"Mark fulfilled",open_maps:"Open in Maps",from_you:"km from you",
@@ -316,7 +326,7 @@ bn:{
  avail:"উপলব্ধ",unavail:"অনুপলব্ধ",rests:"{n} দিন বিরতি",last_donated:"{n} দিন আগে শেষ দান করেছেন",away:"কিমি দূরে",call:"কল করুন",whatsapp:"হোয়াটসঅ্যাপ",
  emg_h:"🚨 জরুরি অনুরোধ",emg_sub:"অনুরোধ পোস্ট করুন; জেলার উপযুক্ত ডোনার সাথে সাথে ম্যাচ হবে।",
  post_req:"অনুরোধ পোস্ট করুন",lbl_patient:"রোগীর নাম",ph_patient:"রোগী / সাথে থাকা ব্যক্তির নাম",lbl_group:"ব্লাড গ্রুপ",lbl_units:"ব্যাগের সংখ্যা",
- lbl_hospital:"হাসপাতাল",ph_hospital:"হাসপাতালের নাম ও ওয়ার্ড",lbl_urgency:"জরুরিতা",urg_critical:"ক্রিটিক্যাল (এখনই)",urg_urgent:"জরুরি (আজকের মধ্যে)",urg_planned:"পরিকল্পিত",
+ lbl_hospital:"হাসপাতাল",ph_hospital:"হাসপাতালের নাম ও ওয়ার্ড",lbl_urgency:"জরুরিতা",urg_critical:"ক্রিটিক্যাল (এখনই)",urg_urgent:"জরুরি (আজকের মধ্যে)",urg_planned:"পরিকল্পিত",lbl_need_by:"কবে লাগবে (ঐচ্ছিক)",need_by:"প্রয়োজন হবে",lbl_time:"সময় (ঐচ্ছিক)",
  lbl_phone:"যোগাযোগের নম্বর",lbl_note:"নোট (ঐচ্ছিক)",broadcast:"অনুরোধ পাঠান",lbl_req_loc:"রোগী / হাসপাতালের অবস্থান (ঐচ্ছিক — কাছের ডোনার খুঁজে পেতে সাহায্য করে)",
  use_gps:"📍 আমার বর্তমান অবস্থান ব্যবহার করুন",loc_set:"✓ অবস্থান নির্ধারিত — ঠিক করতে পিন টেনে সরান",tap_map:"অবস্থান নির্ধারণ করতে ম্যাপে ট্যাপ করুন",
  no_reqs:"এখনো কোনো অনুরোধ নেই।",matching:"জন উপযুক্ত ডোনার",responded:"জন সাড়া দিয়েছেন",fulfilled:"পূরণ হয়েছে ✓",i_can_donate:"আমি দিতে পারি",share:"শেয়ার",matches_btn:"ম্যাচ",banks_btn:"🏥 ব্লাড ব্যাংক",mark_fulfilled:"পূরণ হয়েছে চিহ্নিত করুন",open_maps:"ম্যাপে দেখুন",from_you:"কিমি আপনার থেকে",
@@ -655,7 +665,7 @@ function adminRequestsSection(reqs){
 }
 function adminReqRow(r){
   return `<div class="card listcard" style="${r.done?"opacity:.6":""}"><div class="row"><div class="bg">${r.g}</div><div style="flex:1"><b>${esc(r.pt)}</b><br><span class="pill ${r.urg==="critical"?"crit":r.urg==="urgent"?"urg":""}">${r.urg}</span> <span class="meta">${ago(r.t)}</span></div></div>
-  <div class="meta">🏥 ${esc(r.h)}, ${esc(r.d)}<br>🩸 ${r.u} bag${r.u>1?"s":""} · 👥 ${r.resp} ${t("responded")}</div>
+  <div class="meta">🏥 ${esc(r.h)}, ${esc(r.d)}<br>🩸 ${r.u} bag${r.u>1?"s":""} · 👥 ${r.resp} ${t("responded")}${r.needBy?`<br>📅 ${t("need_by")}: ${fmtNeedBy(r.needBy)}`:""}${r.time?`${r.needBy?" · ":"<br>"}⏰ ${r.time}`:""}</div>
   <div class="acts">${r.done?`<button class="btn sm gh" onclick="adminToggleReq('${r.id}',false)">↺ ${t("admin_reopen")}</button>`:`<button class="btn sm gh" onclick="adminToggleReq('${r.id}',true)">✓ ${t("admin_mark_done")}</button>`}<button class="btn sm gh" onclick="adminDelReq('${r.id}')">🗑 ${t("del")}</button></div></div>`;
 }
 function adminToggleReq(id,done){updateDoc(doc(db,"requests",id),{done}).then(()=>toast(done?t("admin_marked_done"):t("admin_reopened"))).catch(fe)}
@@ -679,7 +689,9 @@ function emergency(){
   <div class="full"><label>${t("lbl_patient")}</label><input id="r_pt" placeholder="${t("ph_patient")}"></div>
   <div><label>${t("lbl_group")}</label><select id="r_g">${opts(G)}</select></div><div><label>${t("lbl_units")}</label><input id="r_u" type="number" min="1" max="10" value="1"></div>
   <div class="full"><label>${t("lbl_hospital")}</label><input id="r_h" placeholder="${t("ph_hospital")}"></div>
-  <div><label>${t("lbl_district")}</label><select id="r_d">${opts(Object.keys(DIST))}</select></div><div><label>${t("lbl_urgency")}</label><select id="r_urg"><option value="critical">${t("urg_critical")}</option><option value="urgent">${t("urg_urgent")}</option><option value="planned">${t("urg_planned")}</option></select></div>
+  <div><label>${t("lbl_district")}</label><select id="r_d">${opts(Object.keys(DIST))}</select></div><div><label>${t("lbl_urgency")}</label><select id="r_urg" onchange="toggleNeedBy(this.value)"><option value="critical">${t("urg_critical")}</option><option value="urgent">${t("urg_urgent")}</option><option value="planned">${t("urg_planned")}</option></select></div>
+  <div class="full" id="r_needwrap" style="display:none"><label>${t("lbl_need_by")}</label><input id="r_need" type="date" min="${new Date().toISOString().slice(0,10)}"></div>
+  <div class="full"><label>${t("lbl_time")}</label><input id="r_time" type="time"></div>
   <div class="full"><label>${t("lbl_phone")}</label><input id="r_ph" type="tel" placeholder="01XXXXXXXXX"></div>
   <div class="full"><label>${t("lbl_req_loc")}</label><div class="acts" style="margin-bottom:8px"><button type="button" class="btn sm gh" onclick="useGps('r')">${t("use_gps")}</button><span class="meta" id="r_locmsg" style="margin:0;align-self:center">${LOC.r?t("loc_set"):t("tap_map")}</span></div><div id="reqmap" class="map" style="height:220px"></div></div>
   <div class="full"><label>${t("lbl_note")}</label><textarea id="r_n" rows="2"></textarea></div>
@@ -688,15 +700,17 @@ function emergency(){
 function reqCard(r){
   const m=matches(r.g,r.d,r),msg=encodeURIComponent(`🚨 Blood needed: ${r.g} (${r.u} bag) at ${r.h}, ${r.d}. Contact: ${r.ph}. Please share.`);
   return `<div class="card listcard" style="${r.done?"opacity:.55":""}"><div class="row"><div class="bg">${r.g}</div><div style="flex:1"><b>${esc(r.pt)}</b><br><span class="pill ${r.urg==="critical"?"crit":r.urg==="urgent"?"urg":""}">${r.urg}</span> <span class="meta">${ago(r.t)}</span></div></div>
-  <div class="meta">🏥 ${esc(r.h)}, ${r.d}<br>🩸 ${r.u} bag${r.u>1?"s":""} needed${r.note?" · "+esc(r.note):""}<br>👥 ${m.length} ${t("matching")} · ${r.resp} ${t("responded")}${r.lat!=null?`<br>🗺 <a href="https://www.google.com/maps/search/?api=1&amp;query=${r.lat},${r.lng}" target="_blank" rel="noopener" style="color:var(--ac);font-weight:600">${t("open_maps")}</a>${pos?" · "+km(pos,[r.lat,r.lng]).toFixed(1)+" "+t("from_you"):""}`:""}</div>
+  <div class="meta">🏥 ${esc(r.h)}, ${r.d}<br>🩸 ${r.u} bag${r.u>1?"s":""} needed${r.note?" · "+esc(r.note):""}${r.needBy?`<br>📅 ${t("need_by")}: ${fmtNeedBy(r.needBy)}`:""}${r.time?`${r.needBy?" · ":"<br>"}⏰ ${r.time}`:""}<br>👥 ${m.length} ${t("matching")} · ${r.resp} ${t("responded")}${r.lat!=null?`<br>🗺 <a href="https://www.google.com/maps/search/?api=1&amp;query=${r.lat},${r.lng}" target="_blank" rel="noopener" style="color:var(--ac);font-weight:600">${t("open_maps")}</a>${pos?" · "+km(pos,[r.lat,r.lng]).toFixed(1)+" "+t("from_you"):""}`:""}</div>
   ${r.posterName?`<div class="row" style="gap:8px;margin:0 0 10px">${avatarHTML(r.posterPhoto||null,"👤",26)}<span class="meta" style="margin:0">${t("posted_by")}: <b style="color:var(--tx)">${esc(r.posterName)}</b></span></div>`:""}
   <div class="acts">${r.done?`<span class="pill">${t("fulfilled")}</span>`:`<button class="btn sm" onclick="respond('${r.id}')">${t("i_can_donate")}</button><a class="btn sm gh" style="text-decoration:none" href="tel:${esc(r.ph)}">${t("call")}</a><a class="btn sm gh" style="text-decoration:none" href="https://wa.me/?text=${msg}" target="_blank" rel="noopener">${t("share")}</a><button class="btn sm gh" onclick="matchList('${r.id}')">${t("matches_btn")}</button><button class="btn sm gh" onclick="goDir('${r.d}')">${t("banks_btn")}</button>${r.uid===user.uid?`<button class="btn sm gh" onclick="fulfil('${r.id}')">${t("mark_fulfilled")}</button>`:""}`}</div></div>`}
+function toggleNeedBy(v){const e=$("#r_needwrap");if(e)e.style.display=v==="planned"?"":"none"}
+function fmtNeedBy(ms){return new Date(ms).toLocaleDateString(LANG==="bn"?"bn-BD":"en-US",{day:"2-digit",month:"short",year:"numeric"})}
 function postReq(){
-  const v=i=>$("#"+i).value.trim(),pt=v("r_pt"),h=v("r_h"),ph=v("r_ph");
+  const v=i=>$("#"+i).value.trim(),pt=v("r_pt"),h=v("r_h"),ph=v("r_ph"),urg=v("r_urg"),need=v("r_need"),time=v("r_time");
   if(!pt||!h||!/^01\d{9}$/.test(ph))return toast(LANG==="bn"?"নাম, হাসপাতাল ও সঠিক ফোন নম্বর দিন (01XXXXXXXXX)":"Please fill name, hospital and a valid BD phone (01XXXXXXXXX)");
   const posterName=(S.me&&S.me.name)||user.displayName||(LANG==="bn"?"সদস্য":"Member"),posterPhoto=(S.me&&S.me.photo)||null;
-  const r={pt,g:v("r_g"),u:Math.min(10,Math.max(1,parseInt(v("r_u"))||1)),h,d:v("r_d"),ph,urg:v("r_urg"),note:v("r_n"),uid:user.uid,posterName,...(posterPhoto?{posterPhoto}:{}),...(LOC.r?{lat:+LOC.r[0].toFixed(4),lng:+LOC.r[1].toFixed(4)}:{}),t:serverTimestamp(),responders:[],done:false};
-  addDoc(collection(db,"requests"),r).then(()=>{LOC.r=null;toast(LANG==="bn"?`${r.d} জেলার ${matches(r.g,r.d,r).length} জন উপযুক্ত ডোনারের কাছে অনুরোধ পাঠানো হয়েছে`:`Broadcast sent to ${matches(r.g,r.d,r).length} matching donors in ${r.d}`);["r_pt","r_h","r_ph","r_n"].forEach(i=>{const e=$("#"+i);if(e)e.value=""})}).catch(fe);
+  const r={pt,g:v("r_g"),u:Math.min(10,Math.max(1,parseInt(v("r_u"))||1)),h,d:v("r_d"),ph,urg,note:v("r_n"),uid:user.uid,posterName,...(posterPhoto?{posterPhoto}:{}),...(LOC.r?{lat:+LOC.r[0].toFixed(4),lng:+LOC.r[1].toFixed(4)}:{}),...(urg==="planned"&&need?{needBy:new Date(need+"T00:00:00").getTime()}:{}),...(time?{time}:{}),t:serverTimestamp(),responders:[],done:false};
+  addDoc(collection(db,"requests"),r).then(()=>{LOC.r=null;toast(LANG==="bn"?`${r.d} জেলার ${matches(r.g,r.d,r).length} জন উপযুক্ত ডোনারের কাছে অনুরোধ পাঠানো হয়েছে`:`Broadcast sent to ${matches(r.g,r.d,r).length} matching donors in ${r.d}`);["r_pt","r_h","r_ph","r_n","r_need","r_time"].forEach(i=>{const e=$("#"+i);if(e)e.value=""});toggleNeedBy("critical")}).catch(fe);
 }
 function respond(id){updateDoc(doc(db,"requests",id),{responders:arrayUnion(user.uid)}).then(()=>toast("Thank you! Call the contact to confirm.")).catch(fe)}
 function fulfil(id){updateDoc(doc(db,"requests",id),{done:true}).then(()=>toast("Marked fulfilled. Thank you, donors!")).catch(fe)}
@@ -746,27 +760,29 @@ function profile(){
   <div class="pbanner"></div>
   <div class="pcard-body">
   <div class="pcard-head">
-  <div class="avwrap">${avatarHTML(photo,m.g,72)}<button class="cam" title="${t("change_photo")}" onclick="$('#avatarInput').click()">📷</button></div>
+  <div class="avwrap ring">
+  <svg class="aring" viewBox="0 0 80 80"><circle class="ring-bg" cx="40" cy="40" r="36"/><circle class="ring-fg" cx="40" cy="40" r="36" style="stroke:${eligible(m)?"var(--ok)":"var(--ac)"}" stroke-dasharray="${(2*Math.PI*36).toFixed(1)}" stroke-dashoffset="${(2*Math.PI*36*(1-(eligible(m)?1:Math.min(1,m.last/90)))).toFixed(1)}"/></svg>
+  ${avatarHTML(photo,m.g,68)}<button class="cam" title="${t("change_photo")}" onclick="$('#avatarInput').click()">📷</button></div>
   <div class="pcard-id"><b style="font-size:17px">${esc(m.name)}</b><div class="donor-id">${t("donor_id")} : ${user.uid.slice(-10).toUpperCase()}</div></div>
   <button class="btn sm gh" onclick="setProfileEdit(true)">✏️ ${t("edit_profile2")}</button>
   </div>
   <span class="pill verified" style="margin-top:10px">${eligible(m)?`<span class="chk">✓</span>`:"⏳"}🩸 ${m.g} · ${eligible(m)?t("eligible_now"):t("next_eligible",90-m.last)}</span>
   <div class="stats" style="margin-top:10px;gap:8px"><div class="stat compact"><b>${my.length}</b><small>${t("my_stats_req")}</small></div><div class="stat compact"><b style="font-size:16px">${eligible(m)?"✅":"⏳"}</b><small>${t("my_stats_elig")}</small></div></div>
   <div class="fields-grid" style="margin-top:12px">
-  <div class="field-card"><div><span class="fl">${t("lbl_group")}</span><b>🩸 ${m.g}</b></div></div>
-  <div class="field-card"><div><span class="fl">${t("lbl_phone")}</span><b>${esc(m.ph)}</b></div></div>
-  <div class="field-card"><div><span class="fl">${t("lbl_district")}</span><b>📍 ${m.d}</b></div></div>
-  <div class="field-card"><div><span class="fl">${t("show_avail")}</span><b>${m.av?t("avail"):t("unavail")}</b></div><label class="sw"><input type="checkbox" ${m.av?"checked":""} onchange="toggleAv(this.checked)"><i></i></label></div>
+  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,var(--ac) 15%,transparent);color:var(--ac)">🩸</div><div class="fc-body"><span class="fl">${t("lbl_group")}</span><b>${m.g}</b></div></div>
+  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,#2f6fed 15%,transparent);color:#2f6fed">📞</div><div class="fc-body"><span class="fl">${t("lbl_phone")}</span><b>${esc(m.ph)}</b></div></div>
+  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)">📍</div><div class="fc-body"><span class="fl">${t("lbl_district")}</span><b>${m.d}</b></div></div>
+  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,#9b5de5 15%,transparent);color:#9b5de5">👁</div><div class="fc-body"><span class="fl">${t("show_avail")}</span><b>${m.av?t("avail"):t("unavail")}</b></div><label class="sw"><input type="checkbox" ${m.av?"checked":""} onchange="toggleAv(this.checked)"><i></i></label></div>
   </div>
   </div>
   </div>
   <div class="sechead">${t("settings_h")}</div>
   <div class="card" style="text-align:left;padding:6px 14px">
-  <button class="setrow" onclick="setLang(LANG==='bn'?'en':'bn')"><span class="picon">🌐</span><span class="stxt">${t("settings_lang")}</span><span class="chev">${LANG==="bn"?"বাংলা":"English"} ›</span></button>
-  <button class="setrow" onclick="toggleTheme()"><span class="picon">◐</span><span class="stxt">${t("settings_theme")}</span><span class="chev">›</span></button>
-  ${deferredInstall?`<button class="setrow" onclick="doInstall()"><span class="picon">⬇</span><span class="stxt">${t("settings_install")}</span><span class="chev">›</span></button>`:""}
-  <button class="setrow" onclick="pwReset()"><span class="picon">🔑</span><span class="stxt">${t("settings_pw")}</span><span class="chev">›</span></button>
-  ${isAdmin?`<button class="setrow" onclick="go('admin')"><span class="picon si">🛡</span><span class="stxt">${t("admin_open")}</span><span class="chev">›</span></button>`:""}
+  <button class="setrow" onclick="setLang(LANG==='bn'?'en':'bn')"><span class="picon" style="background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)">🌐</span><span class="stxt">${t("settings_lang")}</span><span class="chev">${LANG==="bn"?"বাংলা":"English"} ›</span></button>
+  <button class="setrow" onclick="toggleTheme()"><span class="picon" style="background:color-mix(in srgb,var(--warn) 15%,transparent);color:var(--warn)">◐</span><span class="stxt">${t("settings_theme")}</span><span class="chev">›</span></button>
+  ${deferredInstall?`<button class="setrow" onclick="doInstall()"><span class="picon" style="background:color-mix(in srgb,#2f6fed 15%,transparent);color:#2f6fed">⬇</span><span class="stxt">${t("settings_install")}</span><span class="chev">›</span></button>`:""}
+  <button class="setrow" onclick="pwReset()"><span class="picon" style="background:color-mix(in srgb,#9b5de5 15%,transparent);color:#9b5de5">🔑</span><span class="stxt">${t("settings_pw")}</span><span class="chev">›</span></button>
+  ${isAdmin?`<button class="setrow" onclick="go('admin')"><span class="picon si" style="background:color-mix(in srgb,#c9a227 18%,transparent);color:#c9a227">🛡</span><span class="stxt">${t("admin_open")}</span><span class="chev">›</span></button>`:""}
   <button class="setrow" onclick="delMe()"><span class="picon" style="background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)">🗑</span><span class="stxt">${t("settings_remove")}</span><span class="chev">›</span></button>
   <button class="setrow" style="color:var(--ac);border-bottom:0" onclick="signOutU()"><span class="picon" style="background:color-mix(in srgb,var(--ac) 12%,transparent);color:var(--ac)">⏻</span><span class="stxt">${t("signout")}</span><span class="chev">›</span></button>
   </div>
@@ -808,7 +824,7 @@ async function pwReset(){
 }
 view=(location.hash||"#home").slice(1);if(!TABS.some(t=>t[0]===view)&&view!=="admin")view="home";
 addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h!==view&&(TABS.some(t=>t[0]===h)||h==="admin")){view=h;render()}});
-Object.assign(window,{go,chart,loc,postReq,respond,fulfil,matchList,closeM,regDonor,delMe,toggleAv,setMode,doLogin,doRegister,forgot,googleIn,signOutU,setF,useGps,setD,goDir,addFac,stockM,saveStock,verifyFac,delFac,doInstall,F,render,setProfileEdit,openSettings,toggleTheme,pwReset,uploadAvatar,showUpdated,setAV,adminDelDonor,adminToggleReq,adminDelReq});
+Object.assign(window,{go,chart,loc,postReq,respond,fulfil,matchList,closeM,regDonor,delMe,toggleAv,setMode,doLogin,doRegister,forgot,googleIn,signOutU,setF,useGps,setD,goDir,addFac,stockM,saveStock,verifyFac,delFac,doInstall,F,render,setProfileEdit,openSettings,toggleTheme,pwReset,uploadAvatar,showUpdated,setAV,adminDelDonor,adminToggleReq,adminDelReq,toggleNeedBy});
 
 // ---- PWA install prompt ----
 let deferredInstall=null;

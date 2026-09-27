@@ -1,6 +1,6 @@
 // RoktoSetu service worker: offline app shell + runtime caching. Firebase/Auth API calls are never cached
 // (Firestore has its own offline persistence inside the app).
-const V = "roktosetu-v1", RT = V + "-rt", TILES = V + "-tiles";
+const V = "roktosetu-v2", RT = V + "-rt", TILES = V + "-tiles";
 const SHELL = ["/", "/index.html", "/manifest.webmanifest", "/icon-192.png", "/icon-512.png"];
 const bypass = (u) =>
   /^(firestore|identitytoolkit|securetoken|firebaseinstallations)\.googleapis\.com$/.test(u.hostname) ||
@@ -36,7 +36,7 @@ self.addEventListener("fetch", (e) => {
   if (bypass(u)) return;
   if (r.mode === "navigate") {
     e.respondWith(
-      fetch(r).then((res) => { const cp = res.clone(); caches.open(V).then((c) => c.put("/", cp)); return res; })
+      fetch(r, { cache: "no-store" }).then((res) => { const cp = res.clone(); caches.open(V).then((c) => c.put("/", cp)); return res; })
         .catch(() => caches.match("/").then((x) => x || caches.match("/index.html")))
     );
     return;
