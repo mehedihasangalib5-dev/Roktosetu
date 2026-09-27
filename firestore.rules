@@ -13,7 +13,8 @@ service cloud.firestore {
 
     // One donor profile per user (doc id = uid). Only signed-in members can read.
     match /donors/{uid} {
-      allow read: if signedIn();
+      // Public read: guests can browse/search donors without signing in.
+      allow read: if true;
       allow create, update: if signedIn()
         && request.auth.uid == uid
         && request.resource.data.uid == uid
@@ -38,7 +39,8 @@ service cloud.firestore {
 
     // Blood banks / hospitals directory
     match /facilities/{id} {
-      allow read: if signedIn();
+      // Public read: directory is browsable without signing in.
+      allow read: if true;
       allow create: if signedIn()
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.verified == false
@@ -64,7 +66,8 @@ service cloud.firestore {
 
     // Emergency requests
     match /requests/{id} {
-      allow read: if signedIn();
+      // Public read: emergency requests are visible without signing in.
+      allow read: if true;
       allow create: if signedIn()
         && request.resource.data.uid == request.auth.uid
         && validGroup(request.resource.data.g)
