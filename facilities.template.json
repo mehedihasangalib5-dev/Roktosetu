@@ -1,0 +1,13 @@
+[
+  {
+    "name": "EXAMPLE - replace with a real blood bank name",
+    "type": "Blood Bank",
+    "d": "Dhaka",
+    "addr": "Road, area",
+    "ph": "0XXXXXXXXXX",
+    "h24": false,
+    "hours": "9 AM - 9 PM",
+    "lat": 23.7,
+    "lng": 90.4
+  }
+]
