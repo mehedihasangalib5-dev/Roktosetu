@@ -210,6 +210,23 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ac);box-
 .two{display:grid;gap:20px;grid-template-columns:1fr 1fr}
 .fg{display:grid;gap:12px;grid-template-columns:1fr 1fr}
 .fg .full{grid-column:1/-1}
+.authcard{max-width:430px;margin:0 auto;animation:authIn .55s cubic-bezier(.2,.8,.2,1)}
+@keyframes authIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.authtabs{position:relative;display:flex;background:var(--bg);border:1px solid var(--bd);border-radius:14px;padding:4px;margin-bottom:18px}
+.authtabs button{position:relative;z-index:1;flex:1;background:none;border:0;padding:10px 0;border-radius:11px;font-weight:700;font-size:14px;cursor:pointer;color:var(--mut);transition:color .3s}
+.authtabs button.on{color:#fff}
+.authtabs .thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:11px;background:linear-gradient(135deg,var(--ac2),var(--ac));box-shadow:0 6px 16px -4px color-mix(in srgb,var(--ac) 55%,transparent);transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+.authtabs.reg .thumb{transform:translateX(100%)}
+.inwrap{position:relative}
+.inwrap .ic-l{position:absolute;left:13px;top:38px;font-size:15px;color:var(--mut);pointer-events:none}
+.inwrap input{padding-left:38px}
+.inwrap .ic-r{position:absolute;right:5px;top:26px;background:none;border:0;cursor:pointer;color:var(--mut);padding:8px;font-size:14px;border-radius:8px;line-height:1}
+.inwrap .ic-r:hover{color:var(--ac)}
+.btn[disabled]{opacity:.72;cursor:default;pointer-events:none}
+.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;display:inline-block;vertical-align:-2px;margin-right:8px;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:9px}
+.authfoot{text-align:center;margin:14px 0 0;font-size:12px;color:var(--mut);display:flex;align-items:center;justify-content:center;gap:6px}
 .bars{display:grid;gap:9px}
 .bar2{display:grid;grid-template-columns:40px 1fr 30px;gap:10px;align-items:center;font-size:14px;font-weight:600}
 .bar2 i{display:block;height:10px;border-radius:9px;background:linear-gradient(90deg,var(--ac),var(--ac2))}
@@ -412,27 +429,34 @@ const ae=x=>toast(AUTHERR[x.code]||x.code||x.message);
 function authView(){
   const reg=authMode==="register";
   return `<section class="hero"><div><span class="pill crit">${t("hero2_pill")}</span><h1 style="margin-top:14px">${t("hero2_h1a")}<span>${t("hero2_h1b")}</span>${t("hero2_h1c")}</h1><p class="lead">${t("hero2_lead")}</p></div>
-  <div class="card"><div class="acts" style="margin-bottom:16px;flex-wrap:nowrap"><button class="btn sm ${reg?"gh":""}" style="flex:1" onclick="setMode('login')">${t("login")}</button><button class="btn sm ${reg?"":"gh"}" style="flex:1" onclick="setMode('register')">${t("register_tab")}</button></div>
-  <h3 style="margin:0 0 14px">${reg?t("create_acct"):t("welcome_back")}</h3><div class="fg">
-  ${reg?`<div class="full"><label>${t("lbl_full_name2")}</label><input id="a_n" autocomplete="name"></div>`:""}
-  <div class="full"><label>${t("lbl_email_phone")}</label><input id="a_e" autocomplete="username"></div>
-  <div class="full"><label>${t("lbl_password")}</label><input id="a_p" type="password" autocomplete="${reg?"new-password":"current-password"}"></div>
-  ${reg?`<div class="full"><label>${t("lbl_confirm_pw")}</label><input id="a_p2" type="password" autocomplete="new-password"></div>`:""}
-  <div class="full"><button class="btn" style="width:100%" onclick="${reg?"doRegister()":"doLogin()"}">${reg?t("create_account"):t("login")}</button></div>
+  <div class="card authcard">
+  <div class="authtabs ${reg?"reg":""}"><div class="thumb"></div><button class="${reg?"":"on"}" onclick="setMode('login')">${t("login")}</button><button class="${reg?"on":""}" onclick="setMode('register')">${t("register_tab")}</button></div>
+  <h3 style="margin:0 0 18px;font-size:21px;letter-spacing:-.2px">${reg?t("create_acct"):t("welcome_back")}</h3>
+  <div class="fg">
+  ${reg?`<div class="full inwrap"><label>${t("lbl_full_name2")}</label><span class="ic-l">👤</span><input id="a_n" autocomplete="name"></div>`:""}
+  <div class="full inwrap"><label>${t("lbl_email_phone")}</label><span class="ic-l">✉️</span><input id="a_e" autocomplete="username"></div>
+  <div class="full inwrap"><label>${t("lbl_password")}</label><span class="ic-l">🔒</span><input id="a_p" type="password" autocomplete="${reg?"new-password":"current-password"}"><button type="button" class="ic-r" onclick="togglePw('a_p',this)">👁</button></div>
+  ${reg?`<div class="full inwrap"><label>${t("lbl_confirm_pw")}</label><span class="ic-l">🔒</span><input id="a_p2" type="password" autocomplete="new-password"><button type="button" class="ic-r" onclick="togglePw('a_p2',this)">👁</button></div>`:""}
+  <div class="full"><button class="btn" id="authSubmitBtn" style="width:100%" onclick="${reg?"doRegister()":"doLogin()"}">${reg?t("create_account"):t("login")}</button></div>
   <div class="full" style="text-align:center;color:var(--mut);font-size:13px">${t("or")}</div>
-  <div class="full"><button class="btn gh" style="width:100%" onclick="googleIn()">${t("google")}</button></div>
+  <div class="full"><button class="btn gh gbtn" id="gBtn" style="width:100%" onclick="googleIn()"><svg width="17" height="17" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.87 2.7-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.96v2.33A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 0 1 3.67 9c0-.59.1-1.16.28-1.7V4.97H.96A9 9 0 0 0 0 9c0 1.45.35 2.83.96 4.03l2.99-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .96 4.97l2.99 2.33C4.66 5.17 6.65 3.58 9 3.58z"/></svg>${t("google")}</button></div>
   ${reg?"":`<div class="full" style="text-align:center"><button class="btn gh sm" onclick="forgot()">${t("forgot")}</button></div>`}
-  </div></div></section>`}
-async function doLogin(){const id=$("#a_e").value,p=$("#a_p").value;if(!id.trim()||!p)return toast("Enter your email/phone and password");try{await signInWithEmailAndPassword(auth,toEmail(id),p)}catch(x){ae(x)}}
+  </div>
+  <p class="authfoot">🔒 ${LANG==="bn"?"আপনার তথ্য সবসময় এনক্রিপ্টেড ও সুরক্ষিত":"Your data is always encrypted and secure"}</p>
+  </div></section>`}
+function togglePw(id,btn){const i=$("#"+id);if(!i)return;if(i.type==="password"){i.type="text";btn.textContent="🙈"}else{i.type="password";btn.textContent="👁"}}
+function setBusy(id,on){const b=$("#"+id);if(!b)return null;if(on){b.dataset.ot=b.innerHTML;b.disabled=true;b.innerHTML='<span class="spin"></span>'+b.innerHTML}else{b.disabled=false;if(b.dataset.ot)b.innerHTML=b.dataset.ot}return b}
+async function doLogin(){const id=$("#a_e").value,p=$("#a_p").value;if(!id.trim()||!p)return toast("Enter your email/phone and password");setBusy("authSubmitBtn",true);try{await signInWithEmailAndPassword(auth,toEmail(id),p)}catch(x){ae(x)}finally{setBusy("authSubmitBtn",false)}}
 async function doRegister(){
   const n=$("#a_n").value.trim(),id=$("#a_e").value,p=$("#a_p").value,p2=$("#a_p2").value;
   if(!n)return toast("Enter your full name");
   if(!isPhoneId(id)&&!/^\S+@\S+\.\S+$/.test(id.trim()))return toast("Enter a valid email or BD phone (01XXXXXXXXX)");
   if(p.length<6)return toast("Password must be at least 6 characters");
   if(p!==p2)return toast("Passwords do not match");
-  try{const c=await createUserWithEmailAndPassword(auth,toEmail(id),p);await updateProfile(c.user,{displayName:n});toast("Account created. Welcome, "+n+"!")}catch(x){ae(x)}
+  setBusy("authSubmitBtn",true);
+  try{const c=await createUserWithEmailAndPassword(auth,toEmail(id),p);await updateProfile(c.user,{displayName:n});toast("Account created. Welcome, "+n+"!")}catch(x){ae(x)}finally{setBusy("authSubmitBtn",false)}
 }
-async function googleIn(){try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(x){ae(x)}}
+async function googleIn(){setBusy("gBtn",true);try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(x){ae(x)}finally{setBusy("gBtn",false)}}
 async function forgot(){const id=$("#a_e").value;if(!id.trim()||isPhoneId(id))return toast("Enter your email above to get a reset link (phone accounts can't use email reset)");try{await sendPasswordResetEmail(auth,id.trim());toast("Password reset email sent")}catch(x){ae(x)}}
 const signOutU=()=>signOut(auth);
 const toggleAv=v=>updateDoc(doc(db,"donors",user.uid),{av:v}).then(()=>toast(v?(LANG==="bn"?"আপনি অনুসন্ধানকারীদের কাছে দৃশ্যমান":"You are visible to seekers"):(LANG==="bn"?"অনুসন্ধান থেকে লুকানো":"Hidden from search"))).catch(fe);
@@ -865,7 +889,7 @@ async function pwReset(){
 }
 view=(location.hash||"#home").slice(1);if(!ALL_VIEWS.includes(view))view="home";
 addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h!==view&&ALL_VIEWS.includes(h)){view=h;render()}});
-Object.assign(window,{$,go,chart,loc,postReq,respond,fulfil,matchList,closeM,regDonor,delMe,toggleAv,setMode,doLogin,doRegister,forgot,googleIn,signOutU,setF,useGps,setD,goDir,addFac,stockM,saveStock,verifyFac,delFac,doInstall,F,render,setProfileEdit,openSettings,toggleTheme,pwReset,uploadAvatar,showUpdated,setAV,adminDelDonor,adminToggleReq,adminDelReq,toggleNeedBy,toggleAddFac,setLang,toggleLang,toggleDrawer});
+Object.assign(window,{$,go,chart,loc,postReq,respond,fulfil,matchList,closeM,regDonor,delMe,toggleAv,setMode,doLogin,doRegister,forgot,googleIn,signOutU,setF,useGps,setD,goDir,addFac,stockM,saveStock,verifyFac,delFac,doInstall,F,render,setProfileEdit,openSettings,toggleTheme,pwReset,uploadAvatar,showUpdated,setAV,adminDelDonor,adminToggleReq,adminDelReq,toggleNeedBy,toggleAddFac,setLang,toggleLang,toggleDrawer,togglePw});
 
 // ---- PWA install prompt ----
 let deferredInstall=null;
