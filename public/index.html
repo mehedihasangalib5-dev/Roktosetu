@@ -12,15 +12,15 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="RoktoSetu">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,500;0,600;1,500&family=Noto+Sans+Bengali:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#faf7f6;--card:#fff;--tx:#1c1416;--mut:#6f6266;--bd:#eadfe0;--ac:#d4213a;--ac2:#ff5a5f;--ok:#12a36b;--warn:#e88a00;--sh:0 1px 2px rgba(120,20,35,.04),0 20px 40px -14px rgba(120,20,35,.18)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#140d0f;--card:#1f1518;--tx:#f6eeef;--mut:#a89599;--bd:#33232a;--sh:0 1px 2px rgba(0,0,0,.3),0 20px 40px -14px rgba(0,0,0,.55)}}
 :root[data-theme="dark"]{--bg:#140d0f;--card:#1f1518;--tx:#f6eeef;--mut:#a89599;--bd:#33232a;--sh:0 1px 2px rgba(0,0,0,.3),0 20px 40px -14px rgba(0,0,0,.55)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at 12% -8%,color-mix(in srgb,var(--ac) 9%,transparent),transparent 42%),radial-gradient(circle at 100% 0%,color-mix(in srgb,var(--ac2) 8%,transparent),transparent 38%),var(--bg);background-attachment:fixed;color:var(--tx);font-family:"Plus Jakarta Sans","Noto Sans Bengali",Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
-[lang="bn"] body,body:lang(bn){font-family:"Noto Sans Bengali","Plus Jakarta Sans",sans-serif}
+body{margin:0;background:radial-gradient(circle at 10% -10%,color-mix(in srgb,var(--ac) 12%,transparent),transparent 44%),radial-gradient(circle at 105% 4%,color-mix(in srgb,var(--ac2) 14%,transparent),transparent 40%),radial-gradient(circle at 50% 120%,color-mix(in srgb,var(--ac) 6%,transparent),transparent 50%),var(--bg);background-attachment:fixed;color:var(--tx);font-family:"Sora","Noto Sans Bengali",Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+[lang="bn"] body,body:lang(bn){font-family:"Noto Sans Bengali","Sora",sans-serif}
 button,input,select,textarea{font:inherit;color:inherit}
 .wrap{max-width:1080px;margin:0 auto;padding:0 18px}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid var(--bd)}
@@ -42,12 +42,18 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:co
 .bottomnav button.mid:hover .ico{transform:translateY(-3px) scale(1.05);box-shadow:0 10px 22px rgba(212,33,58,.55)}
 .bottomnav button.mid:active .ico{transform:scale(.9)}
 .bottomnav button.mid .lbl{color:var(--tx)}
-body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
-@media(min-width:761px){
-  .bottomnav{padding:0 18px calc(18px + env(safe-area-inset-bottom,0px))}
-  .bottomnav .barin{max-width:480px;border-radius:999px;border:1px solid var(--bd);box-shadow:var(--sh)}
-  body{padding-bottom:calc(94px + env(safe-area-inset-bottom,0px))}
-}
+.drawer-overlay{position:fixed;inset:0;background:rgba(20,10,12,.45);backdrop-filter:blur(2px);z-index:39;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,visibility 0s linear .22s}
+.drawer-overlay.on{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .22s ease}
+.drawer{position:fixed;top:0;bottom:0;left:0;width:280px;max-width:84vw;z-index:40;background:var(--card);border-right:1px solid var(--bd);box-shadow:0 0 40px rgba(0,0,0,.18);transform:translateX(-100%);transition:transform .28s cubic-bezier(.2,.9,.25,1.1);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.drawer.open{transform:translateX(0)}
+.drawer-head{display:flex;align-items:center;gap:10px;padding:16px 14px;border-bottom:1px solid var(--bd)}
+.drawer-head .logo{margin-right:auto}
+.drawer-body{padding:10px;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.drawer-item{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;padding:12px 12px;border-radius:12px;cursor:pointer;color:var(--tx);font-size:14.5px;font-weight:700;transition:.15s}
+.drawer-item:hover{background:color-mix(in srgb,var(--ac) 6%,transparent)}
+.drawer-item.on{background:color-mix(in srgb,var(--ac) 11%,transparent);color:var(--ac)}
+.drawer-item .di-ico{width:22px;text-align:center;font-size:16px;flex:none}
+.drawer-sep{height:1px;background:var(--bd);margin:8px 4px}
 .avwrap{position:relative;width:76px;height:76px;margin:0 auto 10px}
 .avwrap img,.avwrap .bg{width:76px;height:76px;border-radius:50%;object-fit:cover;font-size:26px;border:3px solid var(--card);box-shadow:var(--sh)}
 .avwrap.ring{width:80px;height:80px}
@@ -146,24 +152,25 @@ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 .hero-art .n3{animation:floaty 4.5s ease-in-out infinite .8s}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 @media(max-width:760px){.hero-art{display:none}}
-h1{font-size:clamp(30px,5vw,50px);line-height:1.08;letter-spacing:-1.5px;margin:0 0 14px;font-weight:800}
-h1 span{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1{font-family:"Fraunces","Noto Sans Bengali",serif;font-size:clamp(32px,5vw,54px);line-height:1.05;letter-spacing:-1px;margin:0 0 14px;font-weight:600}
+h1 span{font-style:italic;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+[lang="bn"] h1{font-family:"Noto Sans Bengali",sans-serif;font-weight:800}
 .lead{color:var(--mut);font-size:17px;max-width:520px;margin:0 0 22px;line-height:1.6}
-.btn{border:0;border-radius:12px;padding:12px 20px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--ac2),var(--ac));color:#fff;box-shadow:0 6px 18px rgba(212,33,58,.3);transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s,filter .18s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(212,33,58,.4);filter:brightness(1.04)}
-.btn:active{transform:translateY(0) scale(.96);box-shadow:0 4px 10px rgba(212,33,58,.35)}
+.btn{border:0;border-radius:14px;padding:12px 22px;font-weight:700;letter-spacing:.1px;cursor:pointer;background:linear-gradient(135deg,var(--ac2),var(--ac) 65%);color:#fff;box-shadow:0 8px 20px -4px color-mix(in srgb,var(--ac) 55%,transparent);transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s,filter .18s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -6px color-mix(in srgb,var(--ac) 60%,transparent);filter:brightness(1.05)}
+.btn:active{transform:translateY(0) scale(.96);box-shadow:0 4px 10px color-mix(in srgb,var(--ac) 45%,transparent)}
 .btn.gh{background:var(--card);color:var(--tx);border:1px solid var(--bd);box-shadow:none}
 .btn.gh:hover{border-color:var(--ac);color:var(--ac);background:color-mix(in srgb,var(--ac) 6%,var(--card));transform:translateY(-2px);box-shadow:0 8px 18px rgba(120,20,35,.12)}
 .btn.gh:active{transform:translateY(0) scale(.96)}
-.btn.sm{padding:8px 13px;font-size:14px;border-radius:10px}
+.btn.sm{padding:8px 13px;font-size:14px;border-radius:11px}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:18px;box-shadow:var(--sh)}
+.stat{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:18px;box-shadow:var(--sh)}
 .stat b{display:block;font-size:30px;letter-spacing:-1px;color:var(--ac)}
 .stat small{color:var(--mut)}
 .stat.compact{padding:11px;border-radius:14px}
 .stat.compact b{font-size:20px}
 .stat.compact small{font-size:12px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:18px;box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.04)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:18px;box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.05)}
 .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
 .listcard{transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s}
 .listcard:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(120,20,35,.16)}
@@ -188,7 +195,7 @@ h3{font-size:18px;letter-spacing:-.3px;font-weight:700;margin:0 0 4px}
 .sub{color:var(--mut);margin:0 0 18px;font-size:14.5px}
 .filters{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:16px}
 label{font-size:12.5px;font-weight:700;color:var(--mut);display:block;margin-bottom:6px;letter-spacing:.15px;transition:color .18s,transform .18s}
-input,select,textarea{width:100%;padding:12px 13px;border-radius:11px;border:1.5px solid var(--bd);background:var(--card);transition:border-color .18s,box-shadow .18s;font-size:14.5px}
+input,select,textarea{width:100%;padding:12px 13px;border-radius:12px;border:1.5px solid var(--bd);background:var(--card);transition:border-color .18s,box-shadow .18s;font-size:14.5px}
 input:hover,select:hover,textarea:hover{border-color:color-mix(in srgb,var(--ac) 35%,var(--bd))}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 15%,transparent)}
 .fg>div:focus-within>label,.full:focus-within>label{color:var(--ac);transform:translateY(-1px)}
@@ -228,44 +235,18 @@ footer{margin:50px 0 30px;color:var(--mut);font-size:13px;text-align:center}
 .leaflet-popup-content a{color:#d4213a;font-weight:700}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .leaflet-tile{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9)}}
 :root[data-theme="dark"] .leaflet-tile{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9)}
-
-/* ===== Premium profile redesign ===== */
-.pcard-lux{border:1px solid color-mix(in srgb,var(--ac) 16%,var(--bd));box-shadow:0 1px 2px rgba(120,20,35,.05),0 34px 64px -22px rgba(120,20,35,.24)}
-.pbanner-lux{height:92px;background:radial-gradient(130% 220% at 0% -10%,rgba(255,255,255,.4),transparent 55%),radial-gradient(100% 160% at 105% -20%,rgba(255,255,255,.22),transparent 60%),linear-gradient(120deg,var(--ac) 0%,var(--ac2) 52%,#ffb020 125%)}
-.pbanner-lux:after{background-size:20px 20px;opacity:.3}
-.pbanner .lux-ribbon{position:absolute;top:10px;right:12px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:center;font-size:14px;border:1px solid rgba(255,255,255,.4);box-shadow:0 4px 10px rgba(0,0,0,.15)}
-.pcard-head-lux{margin-top:-42px}
-.avwrap-lux.ring{width:88px;height:88px}
-.avwrap-lux.ring img,.avwrap-lux.ring .bg{width:76px;height:76px;left:6px;top:6px;font-size:25px;border-width:3.5px}
-.pill-lux{background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 88%,#ffb020),var(--ac));box-shadow:0 6px 16px rgba(212,33,58,.32),inset 0 1px 0 rgba(255,255,255,.25)}
-.stat-strip{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.stat-chip{background:var(--bg);border:1px solid var(--bd);border-radius:14px;padding:11px 10px;text-align:center;transition:transform .18s cubic-bezier(.2,.8,.2,1),border-color .18s,box-shadow .18s}
-.stat-chip:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--ac) 35%,var(--bd));box-shadow:0 10px 22px rgba(120,20,35,.1)}
-.stat-chip b{display:block;font-size:19px;letter-spacing:-.3px;color:var(--ac)}
-.stat-chip small{color:var(--mut);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
-.info-tile{position:relative}
-.info-tile:hover{border-color:color-mix(in srgb,var(--ac) 40%,var(--bd));box-shadow:0 8px 18px rgba(120,20,35,.08);transform:translateY(-1px)}
-.info-tile:hover .fc-ico{transform:scale(1.08) rotate(-4deg)}
-.fc-ico{transition:transform .2s cubic-bezier(.2,.8,.2,1)}
-.settings-card{background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 3%,var(--card)),var(--card))}
-.settings-card .setrow{border-radius:12px}
-.settings-card .setrow:hover{transform:translateX(2px)}
-.section-head-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:2px}
-.count-badge{background:color-mix(in srgb,var(--ac) 14%,transparent);color:var(--ac);font-size:12px;font-weight:800;padding:3px 11px;border-radius:99px;flex:none}
-@media(max-width:400px){
-  .pbanner-lux{height:78px}
-  .pcard-head-lux{margin-top:-34px}
-  .avwrap-lux.ring{width:76px;height:76px}
-  .avwrap-lux.ring img,.avwrap-lux.ring .bg{width:64px;height:64px;font-size:22px}
-}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 </head>
 <body>
 <header><div class="wrap bar">
-<div class="logo"><div class="drop"></div>RoktoSetu</div>
+<button class="ic" id="hamBtn" onclick="toggleDrawer()" aria-label="Menu">☰</button>
+<div class="logo" style="cursor:pointer" onclick="go('home')"><div class="drop"></div>RoktoSetu</div>
+<div id="headerAuth" style="margin-left:auto;display:flex;gap:8px;align-items:center"></div>
 </div></header>
+<div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer(false)"></div>
+<nav class="drawer" id="drawer"></nav>
 <div id="offbar"></div>
 <main class="wrap" id="app"></main>
 <footer class="wrap" id="footer"></footer>
@@ -390,6 +371,7 @@ bn:{
 }};
 const t=(k,v)=>{let s=(I18N[LANG]&&I18N[LANG][k])!=null?I18N[LANG][k]:(I18N.en[k]||k);if(v!=null)s=s.replace("{n}",v);return s};
 function setLang(l){LANG=l;try{localStorage.setItem(LS_LANG,l)}catch(e){}document.documentElement.lang=l;render()}
+function toggleLang(){setLang(LANG==="bn"?"en":"bn")}
 const G=["A+","A-","B+","B-","O+","O-","AB+","AB-"];
 const DIST={Dhaka:[23.81,90.41],Chattogram:[22.36,91.78],Sylhet:[24.89,91.87],Rajshahi:[24.37,88.6],Khulna:[22.82,89.55],Barishal:[22.7,90.37],Rangpur:[25.74,89.25],Mymensingh:[24.75,90.4],Cumilla:[23.46,91.18],Gazipur:[24.0,90.42]};
 const CAN={"O-":["O-"],"O+":["O+","O-"],"A-":["A-","O-"],"A+":["A+","A-","O+","O-"],"B-":["B-","O-"],"B+":["B+","B-","O+","O-"],"AB-":["AB-","A-","B-","O-"],"AB+":G};
@@ -413,7 +395,7 @@ const fe=e=>toast(e.code||e.message);
 function listen(){
   unsubs.forEach(f=>f());
   unsubs=[
-    onSnapshot(collection(db,"donors"),sn=>{S.donors=sn.docs.map(d=>{const x=d.data();return{...x,id:d.id,last:Math.floor((Date.now()-(x.lastMs||0))/864e5)}});S.me=S.donors.find(d=>d.id===user.uid)||null;S.loaded.donors=true;soft()},fe),
+    onSnapshot(collection(db,"donors"),sn=>{S.donors=sn.docs.map(d=>{const x=d.data();return{...x,id:d.id,last:Math.floor((Date.now()-(x.lastMs||0))/864e5)}});S.me=user?S.donors.find(d=>d.id===user.uid)||null:null;S.loaded.donors=true;soft()},fe),
     onSnapshot(query(collection(db,"requests"),orderBy("t","desc")),sn=>{S.reqs=sn.docs.map(d=>{const x=d.data(),rs=x.responders||[];return{...x,id:d.id,t:x.t?x.t.toMillis():Date.now(),responders:rs,resp:rs.length}});S.loaded.reqs=true;soft()},fe),
     onSnapshot(query(collection(db,"facilities"),orderBy("name")),sn=>{S.facs=sn.docs.map(d=>{const x=d.data();return{...x,id:d.id,stockAt:x.stockAt?x.stockAt.toMillis():null}});S.loaded.facs=true;soft()},fe)
   ];
@@ -471,20 +453,41 @@ const matches=(g,d,ref)=>{const l=S.donors.filter(x=>CAN[g].includes(x.g)&&x.av&
   if(ref&&ref.lat!=null){const c=[ref.lat,ref.lng];return l.filter(x=>km(c,coord(x))<=25).sort((a,b)=>km(c,coord(a))-km(c,coord(b)))}
   return l.filter(x=>!d||x.d===d)};
 const opts=(a,sel,ph)=>(ph?`<option value="">${ph}</option>`:"")+a.map(x=>`<option ${x===sel?"selected":""}>${x}</option>`).join("");
-const TABS=[["home","nav_home"],["find","nav_find"],["emergency","nav_emergency"],["directory","nav_directory"],["profile","nav_profile"]];
-const NAVICONS={home:"🏠",find:"🔍",emergency:"➕",directory:"🏥",profile:"👤"};
+const TABS=[["home","nav_home"],["find","nav_find"],["emergency","nav_emergency"],["directory","nav_directory"]];
+const NAVICONS={home:"🏠",find:"🔍",emergency:"➕",directory:"🏥",profile:"👤",settings:"⚙️",admin:"🛡",login:"🔑"};
+const ALL_VIEWS=["home","find","emergency","directory","profile","settings","admin","login"];
 function go(v){view=v;location.hash=v;render();const el=$("#app");el.classList.remove("page-in");void el.offsetWidth;el.classList.add("page-in");scrollTo({top:0,behavior:"smooth"})}
 document.documentElement.lang=LANG;
 function render(){
   const keep={};
   document.querySelectorAll("#app input[id],#app select[id],#app textarea[id]").forEach(e=>{keep[e.id]=e.type==="checkbox"?e.checked:e.value});
-  $("#app").innerHTML=!CONFIGURED?setup():!user?authView():({home,find,emergency,directory,profile,admin}[view]||home)();
+  const needsAuth=view==="profile";
+  $("#app").innerHTML=!CONFIGURED?setup():(needsAuth&&!user)?authView():({home,find,emergency,directory,profile,settings:settingsPage,admin,login:authView}[view]||home)();
   Object.entries(keep).forEach(([id,val])=>{const e=document.getElementById(id);if(!e)return;if(e.type==="checkbox")e.checked=val;else if(e.tagName!=="SELECT"||[...e.options].some(o=>o.value===val))e.value=val});
   $("#footer").innerHTML=t("footer");
-  renderBottomNav();
+  renderHeader();
+  renderDrawer();
   document.documentElement.lang=LANG;
   syncOffline();
   afterRender();
+}
+function toggleDrawer(v){const o=$("#drawerOverlay"),d=$("#drawer");if(!o||!d)return;const open=v===undefined?!d.classList.contains("open"):v;d.classList.toggle("open",open);o.classList.toggle("on",open)}
+function renderHeader(){
+  const el=$("#headerAuth");if(!el)return;
+  el.innerHTML=user?`<button class="ic" title="${t("nav_profile")}" onclick="go('profile')">👤</button>`:`<button class="btn sm" onclick="go('login')">${t("login")}</button>`;
+}
+function renderDrawer(){
+  const el=$("#drawer");if(!el)return;
+  const items=TABS.map(([k,l])=>`<button class="drawer-item ${view===k?"on":""}" onclick="go('${k}');toggleDrawer(false)"><span class="di-ico">${NAVICONS[k]}</span>${t(l)}</button>`).join("");
+  const acct=user?`<div class="drawer-sep"></div>
+    <button class="drawer-item ${view==="profile"?"on":""}" onclick="go('profile');toggleDrawer(false)"><span class="di-ico">👤</span>${t("nav_profile")}</button>
+    <button class="drawer-item ${view==="settings"?"on":""}" onclick="go('settings');toggleDrawer(false)"><span class="di-ico">⚙️</span>${t("settings")}</button>
+    ${isAdmin?`<button class="drawer-item ${view==="admin"?"on":""}" onclick="go('admin');toggleDrawer(false)"><span class="di-ico">🛡</span>${t("nav_me")}</button>`:""}
+    <button class="drawer-item" style="color:var(--ac)" onclick="signOutU();toggleDrawer(false)"><span class="di-ico">⏻</span>${t("signout")}</button>`
+   :`<div class="drawer-sep"></div>
+    <button class="drawer-item ${view==="settings"?"on":""}" onclick="go('settings');toggleDrawer(false)"><span class="di-ico">⚙️</span>${t("settings")}</button>
+    <button class="drawer-item ${view==="login"?"on":""}" onclick="go('login');toggleDrawer(false)"><span class="di-ico">🔑</span>${t("login")}</button>`;
+  el.innerHTML=`<div class="drawer-head"><div class="logo"><div class="drop"></div>RoktoSetu</div><button class="ic" onclick="toggleDrawer(false)">✕</button></div><div class="drawer-body">${items}${acct}</div>`;
 }
 function renderBottomNav(){
   const el=$("#bottomnav");
@@ -597,9 +600,10 @@ const dirList=()=>{const q=DF.q.trim().toLowerCase();
   else l.sort((a,b)=>(b.verified-a.verified)||(a.name||"").localeCompare(b.name||""));
   return l};
 function setD(k,v){DF[k]=v;if(k!=="mode"&&k!=="add")dirView=null;render()}
+function toggleAddFac(){setD("add",!DF.add)}
 function goDir(d){DF.d=d;DF.type="";DF.q="";dirView=null;go("directory")}
 function facCard(f){
-  const c=facCoord(f),d=pos&&c?km(pos,c):null,canEdit=isAdmin||f.uid===user.uid;
+  const c=facCoord(f),d=pos&&c?km(pos,c):null,canEdit=isAdmin||(!!user&&f.uid===user.uid);
   const st=f.stock?G.filter(g=>f.stock[g]!=null).map(g=>{const n=f.stock[g];return `<span class="pill ${n===0?"crit":n<5?"urg":""}" style="margin:2px">${g}: ${n}</span>`}).join(""):"";
   return `<div class="card listcard"><div class="row"><div class="bg" style="background:linear-gradient(135deg,#4d8dff,#1b4fd8);font-size:22px">${EM[f.type]||"🏥"}</div><div style="flex:1"><b>${esc(f.name)}</b><br><span class="pill ${f.verified?"":"no"}">${f.verified?t("verified"):t("unverified")}</span> <span class="pill no">${esc(f.type)}</span>${f.h24?' <span class="pill">24/7</span>':""}</div></div>
   <div class="meta">📍 ${esc(f.addr||"")}${f.addr?", ":""}${esc(f.d)}${d!=null?" · "+d.toFixed(1)+" "+t("away"):""}${f.hours&&!f.h24?"<br>🕒 "+esc(f.hours):""}</div>
@@ -622,7 +626,7 @@ function directory(){
   <div><label>${t("lbl_district")}</label><select onchange="setD('d',this.value)">${opts(Object.keys(DIST),DF.d,t("all_districts"))}</select></div>
   <div><label>&nbsp;</label><button class="btn gh" style="width:100%" onclick="loc()">${pos?t("loc_on"):t("loc_use")}</button></div></div>
   <label style="display:flex;gap:7px;align-items:center;margin:0"><input type="checkbox" style="width:auto" ${DF.h24?"checked":""} onchange="setD('h24',this.checked)"> ${t("h24_only")}</label></div>
-  <div class="row" style="justify-content:space-between;margin-bottom:14px;flex-wrap:wrap"><p class="sub" style="margin:0"><b>${l.length}</b> ${t("listing")}</p><div class="acts"><button class="btn sm ${DF.mode==="map"?"gh":""}" onclick="setD('mode','list')">${t("list")}</button><button class="btn sm ${DF.mode==="map"?"":"gh"}" onclick="setD('mode','map')">${t("map")}</button><button class="btn sm gh" onclick="setD('add',!DF.add)">${DF.add?t("cancel_add"):t("add_fac")}</button></div></div>
+  <div class="row" style="justify-content:space-between;margin-bottom:14px;flex-wrap:wrap"><p class="sub" style="margin:0"><b>${l.length}</b> ${t("listing")}</p><div class="acts"><button class="btn sm ${DF.mode==="map"?"gh":""}" onclick="setD('mode','list')">${t("list")}</button><button class="btn sm ${DF.mode==="map"?"":"gh"}" onclick="setD('mode','map')">${t("map")}</button><button class="btn sm gh" onclick="toggleAddFac()">${DF.add?t("cancel_add"):t("add_fac")}</button></div></div>
   ${DF.add?facForm():""}
   ${DF.mode==="map"?`<div id="dirmap" class="map"></div><p class="meta">${t("map_only")}</p>`:(!S.loaded.facs?skeletonGrid(6):(l.length?`<div class="grid">${l.map(facCard).join("")}</div>`:emptyState(t("no_listings"))))}`}
 function drawDir(el){
@@ -634,7 +638,9 @@ function drawDir(el){
   m.on("moveend",()=>{dirView={c:m.getCenter(),z:m.getZoom()}});
   setTimeout(()=>m.invalidateSize(),50);
 }
+function requireAuth(){if(!user){toast(LANG==="bn"?"এগিয়ে যেতে আগে লগইন করুন":"Please sign in first");go("login");return false}return true}
 function addFac(){
+  if(!requireAuth())return;
   const v=i=>$("#"+i).value.trim(),n=v("f_n"),p=v("f_p");
   if(n.length<2)return toast("Enter the facility name");
   if(!/^[0-9+\-\s]{6,20}$/.test(p))return toast("Enter a valid phone number (digits only)");
@@ -732,17 +738,18 @@ function reqCard(r){
   return `<div class="card listcard" style="${r.done?"opacity:.55":""}"><div class="row"><div class="bg">${r.g}</div><div style="flex:1"><b>${esc(r.pt)}</b><br><span class="pill ${r.urg==="critical"?"crit":r.urg==="urgent"?"urg":""}">${r.urg}</span> <span class="meta">${ago(r.t)}</span></div></div>
   <div class="meta">🏥 ${esc(r.h)}, ${r.d}<br>🩸 ${r.u} bag${r.u>1?"s":""} needed${r.note?" · "+esc(r.note):""}${r.needBy?`<br>📅 ${t("need_by")}: ${fmtNeedBy(r.needBy)}`:""}${r.time?`${r.needBy?" · ":"<br>"}⏰ ${r.time}`:""}<br>👥 ${m.length} ${t("matching")} · ${r.resp} ${t("responded")}${r.lat!=null?`<br>🗺 <a href="https://www.google.com/maps/search/?api=1&amp;query=${r.lat},${r.lng}" target="_blank" rel="noopener" style="color:var(--ac);font-weight:600">${t("open_maps")}</a>${pos?" · "+km(pos,[r.lat,r.lng]).toFixed(1)+" "+t("from_you"):""}`:""}</div>
   ${r.posterName?`<div class="row" style="gap:8px;margin:0 0 10px">${avatarHTML(r.posterPhoto||null,"👤",26)}<span class="meta" style="margin:0">${t("posted_by")}: <b style="color:var(--tx)">${esc(r.posterName)}</b></span></div>`:""}
-  <div class="acts">${r.done?`<span class="pill">${t("fulfilled")}</span>`:`<button class="btn sm" onclick="respond('${r.id}')">${t("i_can_donate")}</button><a class="btn sm gh" style="text-decoration:none" href="tel:${esc(r.ph)}">${t("call")}</a><a class="btn sm gh" style="text-decoration:none" href="https://wa.me/?text=${msg}" target="_blank" rel="noopener">${t("share")}</a><button class="btn sm gh" onclick="matchList('${r.id}')">${t("matches_btn")}</button><button class="btn sm gh" onclick="goDir('${r.d}')">${t("banks_btn")}</button>${r.uid===user.uid?`<button class="btn sm gh" onclick="fulfil('${r.id}')">${t("mark_fulfilled")}</button>`:""}`}</div></div>`}
+  <div class="acts">${r.done?`<span class="pill">${t("fulfilled")}</span>`:`<button class="btn sm" onclick="respond('${r.id}')">${t("i_can_donate")}</button><a class="btn sm gh" style="text-decoration:none" href="tel:${esc(r.ph)}">${t("call")}</a><a class="btn sm gh" style="text-decoration:none" href="https://wa.me/?text=${msg}" target="_blank" rel="noopener">${t("share")}</a><button class="btn sm gh" onclick="matchList('${r.id}')">${t("matches_btn")}</button><button class="btn sm gh" onclick="goDir('${r.d}')">${t("banks_btn")}</button>${user&&r.uid===user.uid?`<button class="btn sm gh" onclick="fulfil('${r.id}')">${t("mark_fulfilled")}</button>`:""}`}</div></div>`}
 function toggleNeedBy(v){const e=$("#r_needwrap");if(e)e.style.display=v==="planned"?"":"none"}
 function fmtNeedBy(ms){return new Date(ms).toLocaleDateString(LANG==="bn"?"bn-BD":"en-US",{day:"2-digit",month:"short",year:"numeric"})}
 function postReq(){
+  if(!requireAuth())return;
   const v=i=>$("#"+i).value.trim(),pt=v("r_pt"),h=v("r_h"),ph=v("r_ph"),urg=v("r_urg"),need=v("r_need"),time=v("r_time");
   if(!pt||!h||!/^01\d{9}$/.test(ph))return toast(LANG==="bn"?"নাম, হাসপাতাল ও সঠিক ফোন নম্বর দিন (01XXXXXXXXX)":"Please fill name, hospital and a valid BD phone (01XXXXXXXXX)");
   const posterName=(S.me&&S.me.name)||user.displayName||(LANG==="bn"?"সদস্য":"Member"),posterPhoto=(S.me&&S.me.photo)||null;
   const r={pt,g:v("r_g"),u:Math.min(10,Math.max(1,parseInt(v("r_u"))||1)),h,d:v("r_d"),ph,urg,note:v("r_n"),uid:user.uid,posterName,...(posterPhoto?{posterPhoto}:{}),...(LOC.r?{lat:+LOC.r[0].toFixed(4),lng:+LOC.r[1].toFixed(4)}:{}),...(urg==="planned"&&need?{needBy:new Date(need+"T00:00:00").getTime()}:{}),...(time?{time}:{}),t:serverTimestamp(),responders:[],done:false};
   addDoc(collection(db,"requests"),r).then(()=>{LOC.r=null;toast(LANG==="bn"?`${r.d} জেলার ${matches(r.g,r.d,r).length} জন উপযুক্ত ডোনারের কাছে অনুরোধ পাঠানো হয়েছে`:`Broadcast sent to ${matches(r.g,r.d,r).length} matching donors in ${r.d}`);["r_pt","r_h","r_ph","r_n","r_need","r_time"].forEach(i=>{const e=$("#"+i);if(e)e.value=""});toggleNeedBy("critical")}).catch(fe);
 }
-function respond(id){updateDoc(doc(db,"requests",id),{responders:arrayUnion(user.uid)}).then(()=>toast("Thank you! Call the contact to confirm.")).catch(fe)}
+function respond(id){if(!requireAuth())return;updateDoc(doc(db,"requests",id),{responders:arrayUnion(user.uid)}).then(()=>toast("Thank you! Call the contact to confirm.")).catch(fe)}
 function fulfil(id){updateDoc(doc(db,"requests",id),{done:true}).then(()=>toast("Marked fulfilled. Thank you, donors!")).catch(fe)}
 function open(html){$("#mbody").innerHTML=html+`<button class="btn gh sm" style="margin-top:14px" onclick="closeM()">Close</button>`;$("#modal").classList.add("on")}
 function closeM(){$("#modal").classList.remove("on")}
@@ -786,42 +793,43 @@ function profile(){
   return `<h2 style="margin-bottom:2px">${t("welcome")}, ${esc((m.name||"").split(" ")[0])}</h2>
   <p class="sub" style="margin-top:0">${new Date().toLocaleDateString(LANG==="bn"?"bn-BD":"en-US",{weekday:"short",day:"2-digit",month:"long",year:"numeric"})}</p>
   <div class="profwrap" style="max-width:640px;margin:0 auto 16px">
-  <div class="card pcard pcard-lux">
-  <div class="pbanner pbanner-lux"><span class="lux-ribbon" title="${t("nav_profile")}">💎</span></div>
+  <div class="card pcard">
+  <div class="pbanner"></div>
   <div class="pcard-body">
-  <div class="pcard-head pcard-head-lux">
-  <div class="avwrap ring avwrap-lux">
+  <div class="pcard-head">
+  <div class="avwrap ring">
   <svg class="aring" viewBox="0 0 80 80"><circle class="ring-bg" cx="40" cy="40" r="36"/><circle class="ring-fg" cx="40" cy="40" r="36" style="stroke:${eligible(m)?"var(--ok)":"var(--ac)"}" stroke-dasharray="${(2*Math.PI*36).toFixed(1)}" stroke-dashoffset="${(2*Math.PI*36*(1-(eligible(m)?1:Math.min(1,m.last/90)))).toFixed(1)}"/></svg>
   ${avatarHTML(photo,m.g,68)}<button class="cam" title="${t("change_photo")}" onclick="$('#avatarInput').click()">📷</button></div>
-  <div class="pcard-id"><b style="font-size:18px;letter-spacing:-.2px">${esc(m.name)}</b><div class="donor-id">${t("donor_id")} : ${user.uid.slice(-10).toUpperCase()}</div></div>
-  <button class="btn sm gh" onclick="setProfileEdit(true)">✏️ ${t("edit_profile2")}</button>
+  <div class="pcard-id"><b style="font-size:17px">${esc(m.name)}</b><div class="donor-id">${t("donor_id")} : ${user.uid.slice(-10).toUpperCase()}</div></div>
   </div>
-  <span class="pill verified pill-lux" style="margin-top:12px">${eligible(m)?`<span class="chk">✓</span>`:"⏳"}🩸 ${m.g} · ${eligible(m)?t("eligible_now"):t("next_eligible",90-m.last)}</span>
-  <div class="stat-strip">
-  <div class="stat-chip"><b>${my.length}</b><small>${t("my_stats_req")}</small></div>
-  <div class="stat-chip"><b style="font-size:17px">${eligible(m)?"✅":"⏳"}</b><small>${t("my_stats_elig")}</small></div>
+  <span class="pill verified" style="margin-top:10px">${eligible(m)?`<span class="chk">✓</span>`:"⏳"}🩸 ${m.g} · ${eligible(m)?t("eligible_now"):t("next_eligible",90-m.last)}</span>
+  <div class="stats" style="margin-top:10px;gap:8px"><div class="stat compact"><b>${my.length}</b><small>${t("my_stats_req")}</small></div><div class="stat compact"><b style="font-size:16px">${eligible(m)?"✅":"⏳"}</b><small>${t("my_stats_elig")}</small></div></div>
+  <div class="fields-grid" style="margin-top:12px">
+  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,var(--ac) 15%,transparent);color:var(--ac)">🩸</div><div class="fc-body"><span class="fl">${t("lbl_group")}</span><b>${m.g}</b></div></div>
+  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,#2f6fed 15%,transparent);color:#2f6fed">📞</div><div class="fc-body"><span class="fl">${t("lbl_phone")}</span><b>${esc(m.ph)}</b></div></div>
+  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)">📍</div><div class="fc-body"><span class="fl">${t("lbl_district")}</span><b>${m.d}</b></div></div>
+  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,#9b5de5 15%,transparent);color:#9b5de5">👁</div><div class="fc-body"><span class="fl">${t("show_avail")}</span><b>${m.av?t("avail"):t("unavail")}</b></div><label class="sw"><input type="checkbox" ${m.av?"checked":""} onchange="toggleAv(this.checked)"><i></i></label></div>
   </div>
-  <div class="fields-grid fields-grid-lux" style="margin-top:12px">
-  <div class="field-card info-tile"><div class="fc-ico" style="background:color-mix(in srgb,var(--ac) 15%,transparent);color:var(--ac)">🩸</div><div class="fc-body"><span class="fl">${t("lbl_group")}</span><b>${m.g}</b></div></div>
-  <div class="field-card info-tile"><div class="fc-ico" style="background:color-mix(in srgb,#2f6fed 15%,transparent);color:#2f6fed">📞</div><div class="fc-body"><span class="fl">${t("lbl_phone")}</span><b>${esc(m.ph)}</b></div></div>
-  <div class="field-card info-tile"><div class="fc-ico" style="background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)">📍</div><div class="fc-body"><span class="fl">${t("lbl_district")}</span><b>${m.d}</b></div></div>
-  <div class="field-card info-tile"><div class="fc-ico" style="background:color-mix(in srgb,#9b5de5 15%,transparent);color:#9b5de5">👁</div><div class="fc-body"><span class="fl">${t("show_avail")}</span><b>${m.av?t("avail"):t("unavail")}</b></div><label class="sw"><input type="checkbox" ${m.av?"checked":""} onchange="toggleAv(this.checked)"><i></i></label></div>
-  </div>
+  <button class="btn sm gh" style="width:100%;margin-top:14px" onclick="setProfileEdit(true)">✏️ ${t("edit_profile2")}</button>
+  <button class="btn sm gh" style="width:100%;margin-top:8px" onclick="go('settings')">⚙️ ${t("settings")}</button>
   </div>
   </div>
-  <div class="sechead">${t("settings_h")}</div>
-  <div class="card settings-card" style="text-align:left;padding:6px 14px">
-  <button class="setrow" onclick="setLang(LANG==='bn'?'en':'bn')"><span class="picon" style="background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)">🌐</span><span class="stxt">${t("settings_lang")}</span><span class="chev">${LANG==="bn"?"বাংলা":"English"} ›</span></button>
+  <div class="profwrap" style="display:grid;gap:12px;max-width:640px;margin:0 auto"><h3 style="margin:0">${t("my_reqs")}</h3>${my.map(reqCard).join("")||emptyState(t("no_my_reqs"))}</div>`
+}
+function settingsPage(){
+  return `<h2 style="margin-bottom:2px">${t("settings_h")}</h2>
+  <p class="sub" style="margin-top:0">${t("settings_about")}</p>
+  ${!user?`<div class="card" style="max-width:640px;margin:0 auto 16px;text-align:center"><p class="sub" style="margin:0 0 12px">${t("welcome_back")}</p><button class="btn" onclick="go('login')">🔑 ${t("login")}</button></div>`:""}
+  <div class="card" style="max-width:640px;margin:0 auto;text-align:left;padding:6px 14px">
+  <button class="setrow" onclick="toggleLang()"><span class="picon" style="background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)">🌐</span><span class="stxt">${t("settings_lang")}</span><span class="chev">${LANG==="bn"?"বাংলা":"English"} ›</span></button>
   <button class="setrow" onclick="toggleTheme()"><span class="picon" style="background:color-mix(in srgb,var(--warn) 15%,transparent);color:var(--warn)">◐</span><span class="stxt">${t("settings_theme")}</span><span class="chev">›</span></button>
   ${deferredInstall?`<button class="setrow" onclick="doInstall()"><span class="picon" style="background:color-mix(in srgb,#2f6fed 15%,transparent);color:#2f6fed">⬇</span><span class="stxt">${t("settings_install")}</span><span class="chev">›</span></button>`:""}
+  ${user?`<button class="setrow" onclick="go('profile')"><span class="picon" style="background:color-mix(in srgb,#2f6fed 15%,transparent);color:#2f6fed">👤</span><span class="stxt">${t("nav_profile")}</span><span class="chev">›</span></button>
   <button class="setrow" onclick="pwReset()"><span class="picon" style="background:color-mix(in srgb,#9b5de5 15%,transparent);color:#9b5de5">🔑</span><span class="stxt">${t("settings_pw")}</span><span class="chev">›</span></button>
   ${isAdmin?`<button class="setrow" onclick="go('admin')"><span class="picon si" style="background:color-mix(in srgb,#c9a227 18%,transparent);color:#c9a227">🛡</span><span class="stxt">${t("admin_open")}</span><span class="chev">›</span></button>`:""}
-  <button class="setrow" onclick="delMe()"><span class="picon" style="background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)">🗑</span><span class="stxt">${t("settings_remove")}</span><span class="chev">›</span></button>
-  <button class="setrow" style="color:var(--ac);border-bottom:0" onclick="signOutU()"><span class="picon" style="background:color-mix(in srgb,var(--ac) 12%,transparent);color:var(--ac)">⏻</span><span class="stxt">${t("signout")}</span><span class="chev">›</span></button>
-  </div>
-  <p class="meta" style="margin-top:10px;text-align:center">${t("settings_about")}</p>
-  </div>
-  <div class="profwrap" style="display:grid;gap:12px;max-width:640px;margin:0 auto"><div class="section-head-row"><h3 style="margin:0">${t("my_reqs")}</h3>${my.length?`<span class="count-badge">${my.length}</span>`:""}</div>${my.map(reqCard).join("")||emptyState(t("no_my_reqs"))}</div>`
+  ${S.me?`<button class="setrow" onclick="delMe()"><span class="picon" style="background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)">🗑</span><span class="stxt">${t("settings_remove")}</span><span class="chev">›</span></button>`:""}
+  <button class="setrow" style="color:var(--ac);border-bottom:0" onclick="signOutU()"><span class="picon" style="background:color-mix(in srgb,var(--ac) 12%,transparent);color:var(--ac)">⏻</span><span class="stxt">${t("signout")}</span><span class="chev">›</span></button>`:""}
+  </div>`
 }
 function editProfileView(){
   if(S.me&&S.me.lat!=null&&!LOC.d)LOC.d=[S.me.lat,S.me.lng];
@@ -849,15 +857,15 @@ function regDonor(){
   setDoc(doc(db,"donors",user.uid),{name:n,g:v("d_g"),d:v("d_d"),ph:p,lastMs,av:S.me?S.me.av:true,off,uid:user.uid,...(photo?{photo}:{}),...(LOC.d?{lat:r2(LOC.d[0]),lng:r2(LOC.d[1])}:{})}).then(()=>{PENDING_PHOTO=null;profileEdit=false;go("profile");showUpdated(isNew)}).catch(fe);
 }
 function delMe(){deleteDoc(doc(db,"donors",user.uid)).then(()=>{profileEdit=false;toast(LANG==="bn"?"প্রোফাইল সরানো হয়েছে":"Profile removed")}).catch(fe)}
-function openSettings(){setProfileEdit(false);go("profile")}
+function openSettings(){go("settings")}
 function toggleTheme(){const r=document.documentElement,d=(r.dataset.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"))==="dark";r.dataset.theme=d?"light":"dark"}
 async function pwReset(){
   if(!user||!user.email||user.email.endsWith("@phone.roktosetu.app"))return toast(t("settings_pw_nomail"));
   try{await sendPasswordResetEmail(auth,user.email);toast(t("settings_pw_sent"))}catch(x){ae(x)}
 }
-view=(location.hash||"#home").slice(1);if(!TABS.some(t=>t[0]===view)&&view!=="admin")view="home";
-addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h!==view&&(TABS.some(t=>t[0]===h)||h==="admin")){view=h;render()}});
-Object.assign(window,{go,chart,loc,postReq,respond,fulfil,matchList,closeM,regDonor,delMe,toggleAv,setMode,doLogin,doRegister,forgot,googleIn,signOutU,setF,useGps,setD,goDir,addFac,stockM,saveStock,verifyFac,delFac,doInstall,F,render,setProfileEdit,openSettings,toggleTheme,pwReset,uploadAvatar,showUpdated,setAV,adminDelDonor,adminToggleReq,adminDelReq,toggleNeedBy});
+view=(location.hash||"#home").slice(1);if(!ALL_VIEWS.includes(view))view="home";
+addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h!==view&&ALL_VIEWS.includes(h)){view=h;render()}});
+Object.assign(window,{$,go,chart,loc,postReq,respond,fulfil,matchList,closeM,regDonor,delMe,toggleAv,setMode,doLogin,doRegister,forgot,googleIn,signOutU,setF,useGps,setD,goDir,addFac,stockM,saveStock,verifyFac,delFac,doInstall,F,render,setProfileEdit,openSettings,toggleTheme,pwReset,uploadAvatar,showUpdated,setAV,adminDelDonor,adminToggleReq,adminDelReq,toggleNeedBy,toggleAddFac,setLang,toggleLang,toggleDrawer});
 
 // ---- PWA install prompt ----
 let deferredInstall=null;
@@ -874,7 +882,7 @@ if("serviceWorker" in navigator && location.hostname!=="localhost" && location.p
   addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));
 }
 if(CONFIGURED){app=initializeApp(firebaseConfig);try{getAnalytics(app)}catch(e){}auth=getAuth(app);db=getFirestore(app);
-  onAuthStateChanged(auth,u=>{user=u;unsubs.forEach(f=>f());unsubs=[];S={donors:[],reqs:[],facs:[],me:null,loaded:{donors:false,reqs:false,facs:false}};isAdmin=false;if(u){listen();getDoc(doc(db,"admins",u.uid)).then(d=>{isAdmin=d.exists();render()}).catch(()=>{})}render()})}
+  onAuthStateChanged(auth,u=>{user=u;unsubs.forEach(f=>f());unsubs=[];S={donors:[],reqs:[],facs:[],me:null,loaded:{donors:false,reqs:false,facs:false}};isAdmin=false;listen();if(u){if(view==="login")view="profile";getDoc(doc(db,"admins",u.uid)).then(d=>{isAdmin=d.exists();render()}).catch(()=>{})}render()})}
 render();
 </script>
 </body>
