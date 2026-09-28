@@ -28,6 +28,11 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:co
 .logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:19px;letter-spacing:-.3px;margin-right:auto}
 .drop{width:32px;height:32px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:linear-gradient(135deg,var(--ac2),var(--ac));box-shadow:0 4px 12px rgba(212,33,58,.4)}
 .ic{background:var(--card);border:1px solid var(--bd);border-radius:50%;width:38px;height:38px;cursor:pointer;flex:none;transition:.18s cubic-bezier(.2,.8,.2,1)}
+.ic.hasimg{padding:0;overflow:hidden;border:2px solid var(--ac)}
+.ic.hasimg img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}
+.plink{background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--tx);cursor:pointer;text-align:left}
+.plink:hover{color:var(--ac);text-decoration:underline}
+select:disabled{opacity:.55;cursor:not-allowed}
 .ic:hover{border-color:var(--ac);color:var(--ac);transform:translateY(-2px);box-shadow:0 8px 16px rgba(120,20,35,.12)}
 .ic:active{transform:translateY(0) scale(.92)}
 .bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:center}
@@ -294,7 +299,7 @@ en:{
  by_group:"Donors by blood group",compat_title:"Who can donate to whom?",compat_sub:"Smart matching uses this compatibility chart automatically.",compat_btn:"View compatibility chart",
  how:"How it works",how_body:"1. Search or post an emergency request<br>2. Compatible, eligible donors are matched<br>3. Call or WhatsApp directly — no middleman",
  find_h:"Find a donor",find_sub:"Filter by blood group, district and distance. Turn on your location to sort by nearest and see donors on the map.",
- lbl_group_needed:"Blood group needed",lbl_division:"Division",lbl_district:"District",lbl_upazila:"Upazila / Pourashava",lbl_distance:"Distance",any:"Any",all_districts:"All districts",all_divisions:"All divisions",any_upazila:"Any upazila",
+ lbl_group_needed:"Blood group needed",lbl_division:"Division",lbl_district:"District",lbl_upazila:"Upazila / Pourashava",lbl_distance:"Distance",any:"Any",all_districts:"All districts",all_divisions:"All divisions",any_upazila:"Any upazila",sel_division:"Select division",sel_district:"Select district",sel_upazila:"Select upazila",pick_div_first:"Select division first",pick_dist_first:"Select district first",need_geo:"Please select division and district",user_reqs:"Requests by this member",back_btn:"Back",no_user_reqs:"No requests yet",
  within:"Within {n} km",any_distance:"Any distance",turn_on_loc:"Turn on location",loc_use:"📍 Use my location",loc_on:"📍 Location on",
  incl_compat:"Include compatible groups",only_avail:"Only available donors",
  found:"found",list:"☰ List",map:"🗺 Map",no_match:"No donors match. Try widening filters or post an emergency request.",
@@ -346,7 +351,7 @@ bn:{
  by_group:"গ্রুপ অনুযায়ী ডোনার",compat_title:"কে কাকে দিতে পারে?",compat_sub:"স্মার্ট ম্যাচিং এই কম্প্যাটিবিলিটি চার্ট স্বয়ংক্রিয়ভাবে ব্যবহার করে।",compat_btn:"কম্প্যাটিবিলিটি চার্ট দেখুন",
  how:"যেভাবে কাজ করে",how_body:"১. অনুসন্ধান করুন বা জরুরি অনুরোধ পোস্ট করুন<br>২. উপযুক্ত ডোনার অটো ম্যাচ হয়<br>৩. সরাসরি কল বা হোয়াটসঅ্যাপ করুন — কোনো মধ্যস্থতাকারী নেই",
  find_h:"ডোনার খুঁজুন",find_sub:"ব্লাড গ্রুপ, জেলা ও দূরত্ব দিয়ে ফিল্টার করুন। লোকেশন অন করলে কাছের ডোনার আগে দেখাবে এবং ম্যাপে দেখা যাবে।",
- lbl_group_needed:"প্রয়োজনীয় গ্রুপ",lbl_division:"বিভাগ",lbl_district:"জেলা",lbl_upazila:"উপজেলা / পৌরসভা",lbl_distance:"দূরত্ব",any:"যেকোনো",all_districts:"সব জেলা",all_divisions:"সব বিভাগ",any_upazila:"যেকোনো উপজেলা",
+ lbl_group_needed:"প্রয়োজনীয় গ্রুপ",lbl_division:"বিভাগ",lbl_district:"জেলা",lbl_upazila:"উপজেলা / পৌরসভা",lbl_distance:"দূরত্ব",any:"যেকোনো",all_districts:"সব জেলা",all_divisions:"সব বিভাগ",any_upazila:"যেকোনো উপজেলা",sel_division:"বিভাগ নির্বাচন করুন",sel_district:"জেলা নির্বাচন করুন",sel_upazila:"উপজেলা নির্বাচন করুন",pick_div_first:"আগে বিভাগ নির্বাচন করুন",pick_dist_first:"আগে জেলা নির্বাচন করুন",need_geo:"বিভাগ ও জেলা নির্বাচন করুন",user_reqs:"এই সদস্যের অনুরোধ",back_btn:"ফিরে যান",no_user_reqs:"এখনো কোনো অনুরোধ নেই",
  within:"{n} কিমি এর মধ্যে",any_distance:"যেকোনো দূরত্ব",turn_on_loc:"লোকেশন অন করুন",loc_use:"📍 আমার লোকেশন ব্যবহার করুন",loc_on:"📍 লোকেশন অন",
  incl_compat:"সামঞ্জস্যপূর্ণ গ্রুপও দেখান",only_avail:"শুধু উপলব্ধ ডোনার",
  found:"জন পাওয়া গেছে",list:"☰ লিস্ট",map:"🗺 ম্যাপ",no_match:"কোনো ডোনার মিলছে না। ফিল্টার কমিয়ে দেখুন বা জরুরি অনুরোধ পোস্ট করুন।",
@@ -451,8 +456,14 @@ function authView(){
   </div>
   <p class="authfoot">🔒 ${LANG==="bn"?"আপনার তথ্য সবসময় এনক্রিপ্টেড ও সুরক্ষিত":"Your data is always encrypted and secure"}</p>
   </div></section>`}
-function cascadeDist(pfx){const dv=$("#"+pfx+"_div").value;$("#"+pfx+"_d").innerHTML=opts(distsOf(dv),"",dv?"":t("all_districts"));const u=$("#"+pfx+"_upz");if(u)u.innerHTML=`<option value="">${t("any_upazila")}</option>`}
-function cascadeUpz(pfx){const d=$("#"+pfx+"_d").value,u=$("#"+pfx+"_upz");if(u)u.innerHTML=opts(upzOf(d),"",t("any_upazila"))}
+function geoFill(pfx,dv,dn,un){
+  const d=$("#"+pfx+"_d"),u=$("#"+pfx+"_upz");
+  if(d){d.innerHTML=dv?opts(distsOf(dv),dn||"",t("sel_district")):opts([],"",t("pick_div_first"));d.disabled=!dv}
+  if(u){const ok=dv&&dn;u.innerHTML=ok?opts(upzOf(dn),un||"",t("sel_upazila")):opts([],"",t("pick_dist_first"));u.disabled=!ok}
+}
+function cascadeDist(pfx){geoFill(pfx,$("#"+pfx+"_div").value,"","")}
+function cascadeUpz(pfx){geoFill(pfx,$("#"+pfx+"_div").value,$("#"+pfx+"_d").value,"")}
+function geoOk(pfx){const dv=$("#"+pfx+"_div").value,d=$("#"+pfx+"_d").value;if(!dv||!d){toast(t("need_geo"));return false}return true}
 function togglePw(id,btn){const i=$("#"+id);if(!i)return;if(i.type==="password"){i.type="text";btn.textContent="🙈"}else{i.type="password";btn.textContent="👁"}}
 function setBusy(id,on){const b=$("#"+id);if(!b)return null;if(on){b.dataset.ot=b.innerHTML;b.disabled=true;b.innerHTML='<span class="spin"></span>'+b.innerHTML}else{b.disabled=false;if(b.dataset.ot)b.innerHTML=b.dataset.ot}return b}
 async function doLogin(){const id=$("#a_e").value,p=$("#a_p").value;if(!id.trim()||!p)return toast("Enter your email/phone and password");setBusy("authSubmitBtn",true);try{await signInWithEmailAndPassword(auth,toEmail(id),p)}catch(x){ae(x)}finally{setBusy("authSubmitBtn",false)}}
@@ -495,8 +506,9 @@ function render(){
   const keep={};
   document.querySelectorAll("#app input[id],#app select[id],#app textarea[id]").forEach(e=>{keep[e.id]=e.type==="checkbox"?e.checked:e.value});
   const needsAuth=view==="profile";
-  $("#app").innerHTML=!CONFIGURED?setup():(needsAuth&&!user)?authView():({home,find,emergency,directory,profile,settings:settingsPage,admin,login:authView}[view]||home)();
+  $("#app").innerHTML=!CONFIGURED?setup():(needsAuth&&!user)?authView():({home,find,emergency,directory,profile,user:userView,settings:settingsPage,admin,login:authView}[view]||home)();
   Object.entries(keep).forEach(([id,val])=>{const e=document.getElementById(id);if(!e)return;if(e.type==="checkbox")e.checked=val;else if(e.tagName!=="SELECT"||[...e.options].some(o=>o.value===val))e.value=val});
+  ["d","f","r"].forEach(p=>{if(document.getElementById(p+"_div")&&keep[p+"_div"])geoFill(p,keep[p+"_div"],keep[p+"_d"],keep[p+"_upz"])});
   $("#footer").innerHTML=t("footer");
   renderHeader();
   renderDrawer();
@@ -507,7 +519,8 @@ function render(){
 function toggleDrawer(v){const o=$("#drawerOverlay"),d=$("#drawer");if(!o||!d)return;const open=v===undefined?!d.classList.contains("open"):v;d.classList.toggle("open",open);o.classList.toggle("on",open)}
 function renderHeader(){
   const el=$("#headerAuth");if(!el)return;
-  el.innerHTML=user?`<button class="ic" title="${t("nav_profile")}" onclick="go('profile')">👤</button>`:`<button class="btn sm" onclick="go('login')">${t("login")}</button>`;
+  const ph=user&&(PENDING_PHOTO||(S.me&&S.me.photo))||null;
+  el.innerHTML=user?`<button class="ic${ph?" hasimg":""}" title="${t("nav_profile")}" onclick="go('profile')">${ph?`<img src="${ph}" alt="">`:"👤"}</button>`:`<button class="btn sm" onclick="go('login')">${t("login")}</button>`;
 }
 function renderDrawer(){
   const el=$("#drawer");if(!el)return;
@@ -563,8 +576,8 @@ function find(){
   return `<h2>${t("find_h")}</h2><p class="sub">${t("find_sub")}</p>
   <div class="card" style="margin-bottom:16px"><div class="filters"><div><label>${t("lbl_group_needed")}</label><select onchange="setF('g',this.value)">${opts(G,F.g,t("any"))}</select></div>
   <div><label>${t("lbl_division")}</label><select onchange="setF('div',this.value)">${opts(DIVS,F.div,t("all_divisions"))}</select></div>
-  <div><label>${t("lbl_district")}</label><select onchange="setF('d',this.value)">${opts(distsOf(F.div),F.d,t("all_districts"))}</select></div>
-  <div><label>${t("lbl_upazila")}</label><select onchange="setF('upz',this.value)">${opts(upzOf(F.d),F.upz,t("any_upazila"))}</select></div>
+  <div><label>${t("lbl_district")}</label><select ${F.div?"":"disabled"} onchange="setF('d',this.value)">${F.div?opts(distsOf(F.div),F.d,t("all_districts")):opts([],"",t("pick_div_first"))}</select></div>
+  <div><label>${t("lbl_upazila")}</label><select ${F.d?"":"disabled"} onchange="setF('upz',this.value)">${F.d?opts(upzOf(F.d),F.upz,t("any_upazila")):opts([],"",t("pick_dist_first"))}</select></div>
   <div><label>${t("lbl_distance")}</label><select onchange="setF('r',this.value)" ${pos?"":"disabled"}>${[0,5,10,25,50,100].map(x=>`<option value="${x}" ${F.r===x?"selected":""}>${x?t("within",x):pos?t("any_distance"):t("turn_on_loc")}</option>`).join("")}</select></div>
   <div><label>&nbsp;</label><button class="btn gh" style="width:100%" onclick="loc()">${pos?t("loc_on"):t("loc_use")}</button></div></div>
   <div class="acts"><label style="display:flex;gap:7px;align-items:center;margin:0"><input type="checkbox" style="width:auto" ${F.compat?"checked":""} onchange="setF('compat',this.checked)"> ${t("incl_compat")}</label>
@@ -647,8 +660,8 @@ function facCard(f){
 function facForm(){
   return `<div class="card" style="margin-bottom:16px"><h3 style="margin:0 0 14px">${t("add_fac_h")}</h3><div class="fg">
   <div class="full"><label>${t("lbl_name")}</label><input id="f_n" placeholder="${t("ph_fac_name")}"></div>
-  <div><label>${t("type")}</label><select id="f_t">${opts(TYPES)}</select></div><div><label>${t("lbl_division")}</label><select id="f_div" onchange="cascadeDist('f')">${opts(DIVS,"",t("all_divisions"))}</select></div>
-  <div><label>${t("lbl_district")}</label><select id="f_d" onchange="cascadeUpz('f')">${opts(Object.keys(DIST))}</select></div><div><label>${t("lbl_upazila")}</label><select id="f_upz">${opts([],"",t("any_upazila"))}</select></div>
+  <div><label>${t("type")}</label><select id="f_t">${opts(TYPES)}</select></div><div><label>${t("lbl_division")}</label><select id="f_div" onchange="cascadeDist('f')">${opts(DIVS,"",t("sel_division"))}</select></div>
+  <div><label>${t("lbl_district")}</label><select id="f_d" disabled onchange="cascadeUpz('f')">${opts([],"",t("pick_div_first"))}</select></div><div><label>${t("lbl_upazila")}</label><select id="f_upz" disabled>${opts([],"",t("pick_dist_first"))}</select></div>
   <div class="full"><label>${t("lbl_address")}</label><input id="f_a" placeholder="${t("ph_address")}"></div>
   <div><label>${t("lbl_phone")}</label><input id="f_p" type="tel" placeholder="Hotline or landline"></div><div><label>${t("lbl_hours")}</label><input id="f_hr" placeholder="${t("ph_hours")}"></div>
   <div class="full"><label style="display:flex;gap:8px;align-items:center;margin:0"><input id="f_h24" type="checkbox" style="width:auto"> ${t("open247")}</label></div>
@@ -660,8 +673,8 @@ function directory(){
   <div class="card" style="margin-bottom:16px"><div class="filters"><div><label>${t("search")}</label><input placeholder="${t("ph_search")}" value="${esc(DF.q)}" onchange="setD('q',this.value)"></div>
   <div><label>${t("type")}</label><select onchange="setD('type',this.value)">${opts(TYPES,DF.type,t("all_types"))}</select></div>
   <div><label>${t("lbl_division")}</label><select onchange="setD('div',this.value)">${opts(DIVS,DF.div,t("all_divisions"))}</select></div>
-  <div><label>${t("lbl_district")}</label><select onchange="setD('d',this.value)">${opts(distsOf(DF.div),DF.d,t("all_districts"))}</select></div>
-  <div><label>${t("lbl_upazila")}</label><select onchange="setD('upz',this.value)">${opts(upzOf(DF.d),DF.upz,t("any_upazila"))}</select></div>
+  <div><label>${t("lbl_district")}</label><select ${DF.div?"":"disabled"} onchange="setD('d',this.value)">${DF.div?opts(distsOf(DF.div),DF.d,t("all_districts")):opts([],"",t("pick_div_first"))}</select></div>
+  <div><label>${t("lbl_upazila")}</label><select ${DF.d?"":"disabled"} onchange="setD('upz',this.value)">${DF.d?opts(upzOf(DF.d),DF.upz,t("any_upazila")):opts([],"",t("pick_dist_first"))}</select></div>
   <div><label>&nbsp;</label><button class="btn gh" style="width:100%" onclick="loc()">${pos?t("loc_on"):t("loc_use")}</button></div></div>
   <label style="display:flex;gap:7px;align-items:center;margin:0"><input type="checkbox" style="width:auto" ${DF.h24?"checked":""} onchange="setD('h24',this.checked)"> ${t("h24_only")}</label></div>
   <div class="row" style="justify-content:space-between;margin-bottom:14px;flex-wrap:wrap"><p class="sub" style="margin:0"><b>${l.length}</b> ${t("listing")}</p><div class="acts"><button class="btn sm ${DF.mode==="map"?"gh":""}" onclick="setD('mode','list')">${t("list")}</button><button class="btn sm ${DF.mode==="map"?"":"gh"}" onclick="setD('mode','map')">${t("map")}</button><button class="btn sm gh" onclick="toggleAddFac()">${DF.add?t("cancel_add"):t("add_fac")}</button></div></div>
@@ -680,6 +693,7 @@ function requireAuth(){if(!user){toast(LANG==="bn"?"এগিয়ে যেত
 function addFac(){
   if(!requireAuth())return;
   const v=i=>$("#"+i).value.trim(),n=v("f_n"),p=v("f_p");
+  if(!geoOk("f"))return;
   if(n.length<2)return toast("Enter the facility name");
   if(!/^[0-9+\-\s]{6,20}$/.test(p))return toast("Enter a valid phone number (digits only)");
   const o={name:n,type:v("f_t"),d:v("f_d"),upz:v("f_upz"),addr:v("f_a"),ph:p,h24:$("#f_h24").checked,hours:v("f_hr"),verified:false,uid:user.uid,t:serverTimestamp(),...(LOC.f?{lat:+LOC.f[0].toFixed(5),lng:+LOC.f[1].toFixed(5)}:{})};
@@ -763,20 +777,24 @@ function emergency(){
   <div class="full"><label>${t("lbl_patient")}</label><input id="r_pt" placeholder="${t("ph_patient")}"></div>
   <div><label>${t("lbl_group")}</label><select id="r_g">${opts(G)}</select></div><div><label>${t("lbl_units")}</label><input id="r_u" type="number" min="1" max="10" value="1"></div>
   <div class="full"><label>${t("lbl_hospital")}</label><input id="r_h" placeholder="${t("ph_hospital")}"></div>
-  <div><label>${t("lbl_division")}</label><select id="r_div" onchange="cascadeDist('r')">${opts(DIVS,"",t("all_divisions"))}</select></div><div><label>${t("lbl_district")}</label><select id="r_d" onchange="cascadeUpz('r')">${opts(Object.keys(DIST))}</select></div>
-  <div><label>${t("lbl_upazila")}</label><select id="r_upz">${opts([],"",t("any_upazila"))}</select></div><div><label>${t("lbl_urgency")}</label><select id="r_urg" onchange="toggleNeedBy(this.value)"><option value="critical">${t("urg_critical")}</option><option value="urgent">${t("urg_urgent")}</option><option value="planned">${t("urg_planned")}</option></select></div>
+  <div><label>${t("lbl_division")}</label><select id="r_div" onchange="cascadeDist('r')">${opts(DIVS,"",t("sel_division"))}</select></div><div><label>${t("lbl_district")}</label><select id="r_d" disabled onchange="cascadeUpz('r')">${opts([],"",t("pick_div_first"))}</select></div>
+  <div><label>${t("lbl_upazila")}</label><select id="r_upz" disabled>${opts([],"",t("pick_dist_first"))}</select></div><div><label>${t("lbl_urgency")}</label><select id="r_urg" onchange="toggleNeedBy(this.value)"><option value="critical">${t("urg_critical")}</option><option value="urgent">${t("urg_urgent")}</option><option value="planned">${t("urg_planned")}</option></select></div>
   <div class="full" id="r_needwrap" style="display:none"><label>${t("lbl_need_by")}</label><input id="r_need" type="date" min="${new Date().toISOString().slice(0,10)}"></div>
   <div class="full"><label>${t("lbl_time")}</label><input id="r_time" type="time"></div>
   <div class="full"><label>${t("lbl_phone")}</label><input id="r_ph" type="tel" placeholder="01XXXXXXXXX"></div>
   <div class="full"><label>${t("lbl_req_loc")}</label><div class="acts" style="margin-bottom:8px"><button type="button" class="btn sm gh" onclick="useGps('r')">${t("use_gps")}</button><span class="meta" id="r_locmsg" style="margin:0;align-self:center">${LOC.r?t("loc_set"):t("tap_map")}</span></div><div id="reqmap" class="map" style="height:220px"></div></div>
   <div class="full"><label>${t("lbl_note")}</label><textarea id="r_n" rows="2"></textarea></div>
   <div class="full"><button class="btn" style="width:100%" onclick="postReq()">${t("broadcast")}</button></div></div></div>
-  <div style="display:grid;gap:12px;align-content:start">${l.map(reqCard).join("")||emptyState(t("no_reqs"))}</div></div>`}
-function reqCard(r){
-  const m=matches(r.g,r.d,r),msg=encodeURIComponent(`🚨 Blood needed: ${r.g} (${r.u} bag) at ${r.h}, ${r.d}. Contact: ${r.ph}. Please share.`);
-  return `<div class="card listcard" style="${r.done?"opacity:.55":""}"><div class="row"><div class="bg">${r.g}</div><div style="flex:1"><b>${esc(r.pt)}</b><br><span class="pill ${r.urg==="critical"?"crit":r.urg==="urgent"?"urg":""}">${r.urg}</span> <span class="meta">${ago(r.t)}</span></div></div>
+  <div style="display:grid;gap:12px;align-content:start">${l.map(r=>reqCard(r)).join("")||emptyState(t("no_reqs"))}</div></div>`}
+function posterHTML(r){
+  const po=S.donors.find(x=>x.uid===r.uid),name=(po&&po.name)||r.posterName,photo=(po&&po.photo)||r.posterPhoto||null;
+  if(!name)return"";
+  return `<div class="row" style="gap:10px;margin:0 0 12px;align-items:center">${avatarHTML(photo,"👤",40)}<div><button class="plink" onclick="viewUser('${r.uid}')">${esc(name)}</button><div class="meta" style="margin:0">${t("posted_by")} · ${ago(r.t)}</div></div></div>`}
+function reqCard(r,noPoster){
+  const hasPoster=noPoster!==true&&!!(r.posterName||S.donors.some(x=>x.uid===r.uid)),
+  m=matches(r.g,r.d,r),msg=encodeURIComponent(`🚨 Blood needed: ${r.g} (${r.u} bag) at ${r.h}, ${r.d}. Contact: ${r.ph}. Please share.`);
+  return `<div class="card listcard" style="${r.done?"opacity:.55":""}">${hasPoster?posterHTML(r):""}<div class="row"><div class="bg">${r.g}</div><div style="flex:1"><b>${esc(r.pt)}</b><br><span class="pill ${r.urg==="critical"?"crit":r.urg==="urgent"?"urg":""}">${r.urg}</span> ${hasPoster?"":`<span class="meta">${ago(r.t)}</span>`}</div></div>
   <div class="meta">🏥 ${esc(r.h)}, ${r.d}<br>🩸 ${r.u} bag${r.u>1?"s":""} needed${r.note?" · "+esc(r.note):""}${r.needBy?`<br>📅 ${t("need_by")}: ${fmtNeedBy(r.needBy)}`:""}${r.time?`${r.needBy?" · ":"<br>"}⏰ ${r.time}`:""}<br>👥 ${m.length} ${t("matching")} · ${r.resp} ${t("responded")}${r.lat!=null?`<br>🗺 <a href="https://www.google.com/maps/search/?api=1&amp;query=${r.lat},${r.lng}" target="_blank" rel="noopener" style="color:var(--ac);font-weight:600">${t("open_maps")}</a>${pos?" · "+km(pos,[r.lat,r.lng]).toFixed(1)+" "+t("from_you"):""}`:""}</div>
-  ${r.posterName?`<div class="row" style="gap:8px;margin:0 0 10px">${avatarHTML(r.posterPhoto||null,"👤",26)}<span class="meta" style="margin:0">${t("posted_by")}: <b style="color:var(--tx)">${esc(r.posterName)}</b></span></div>`:""}
   <div class="acts">${r.done?`<span class="pill">${t("fulfilled")}</span>`:`<button class="btn sm" onclick="respond('${r.id}')">${t("i_can_donate")}</button><a class="btn sm gh" style="text-decoration:none" href="tel:${esc(r.ph)}">${t("call")}</a><a class="btn sm gh" style="text-decoration:none" href="https://wa.me/?text=${msg}" target="_blank" rel="noopener">${t("share")}</a><button class="btn sm gh" onclick="matchList('${r.id}')">${t("matches_btn")}</button><button class="btn sm gh" onclick="goDir('${r.d}')">${t("banks_btn")}</button>${user&&r.uid===user.uid?`<button class="btn sm gh" onclick="fulfil('${r.id}')">${t("mark_fulfilled")}</button>`:""}`}</div></div>`}
 function toggleNeedBy(v){const e=$("#r_needwrap");if(e)e.style.display=v==="planned"?"":"none"}
 function fmtNeedBy(ms){return new Date(ms).toLocaleDateString(LANG==="bn"?"bn-BD":"en-US",{day:"2-digit",month:"short",year:"numeric"})}
@@ -784,6 +802,7 @@ function postReq(){
   if(!requireAuth())return;
   const v=i=>$("#"+i).value.trim(),pt=v("r_pt"),h=v("r_h"),ph=v("r_ph"),urg=v("r_urg"),need=v("r_need"),time=v("r_time");
   if(!pt||!h||!/^01\d{9}$/.test(ph))return toast(LANG==="bn"?"নাম, হাসপাতাল ও সঠিক ফোন নম্বর দিন (01XXXXXXXXX)":"Please fill name, hospital and a valid BD phone (01XXXXXXXXX)");
+  if(!geoOk("r"))return;
   const posterName=(S.me&&S.me.name)||user.displayName||(LANG==="bn"?"সদস্য":"Member"),posterPhoto=(S.me&&S.me.photo)||null;
   const r={pt,g:v("r_g"),u:Math.min(10,Math.max(1,parseInt(v("r_u"))||1)),h,d:v("r_d"),upz:v("r_upz"),ph,urg,note:v("r_n"),uid:user.uid,posterName,...(posterPhoto?{posterPhoto}:{}),...(LOC.r?{lat:+LOC.r[0].toFixed(4),lng:+LOC.r[1].toFixed(4)}:{}),...(urg==="planned"&&need?{needBy:new Date(need+"T00:00:00").getTime()}:{}),...(time?{time}:{}),t:serverTimestamp(),responders:[],done:false};
   addDoc(collection(db,"requests"),r).then(()=>{LOC.r=null;toast(LANG==="bn"?`${r.d} জেলার ${matches(r.g,r.d,r).length} জন উপযুক্ত ডোনারের কাছে অনুরোধ পাঠানো হয়েছে`:`Broadcast sent to ${matches(r.g,r.d,r).length} matching donors in ${r.d}`);["r_pt","r_h","r_ph","r_n","r_need","r_time"].forEach(i=>{const e=$("#"+i);if(e)e.value=""});toggleNeedBy("critical")}).catch(fe);
@@ -825,6 +844,27 @@ function uploadAvatar(ev){
   };img.src=e.target.result};
   reader.readAsDataURL(f);
 }
+let viewUid=null,userBack="emergency";
+function viewUser(uid){if(user&&uid===user.uid)return go("profile");userBack=view==="user"?userBack:view;viewUid=uid;go("user")}
+function userView(){
+  const u=viewUid,d=S.donors.find(x=>x.uid===u),reqs=S.reqs.filter(r=>r.uid===u),sn=reqs[0];
+  const back=`<button class="btn sm gh" style="margin-bottom:12px" onclick="go('${userBack}')">← ${t("back_btn")}</button>`;
+  if(!d&&!sn)return `<div style="max-width:640px;margin:0 auto">${back}${emptyState(t("no_user_reqs"))}</div>`;
+  const name=(d&&d.name)||sn.posterName||(LANG==="bn"?"সদস্য":"Member"),photo=(d&&d.photo)||(sn&&sn.posterPhoto)||null;
+  const ok=d&&eligible(d);
+  return `<div class="profwrap" style="max-width:640px;margin:0 auto 16px">${back}
+  <div class="card pcard"><div class="pbanner"></div><div class="pcard-body">
+  <div class="pcard-head"><div class="avwrap">${avatarHTML(photo,d?d.g:"👤",68)}</div>
+  <div class="pcard-id"><b style="font-size:17px">${esc(name)}</b><div class="donor-id">${t("donor_id")} : ${String(u).slice(-10).toUpperCase()}</div></div></div>
+  ${d?`<span class="pill verified" style="margin-top:10px">${ok?`<span class="chk">✓</span>`:"⏳"}🩸 ${d.g} · ${ok?t("eligible_now"):t("next_eligible",90-d.last)}</span>
+  <div class="fields-grid" style="margin-top:12px">
+  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,var(--ac) 15%,transparent);color:var(--ac)">🩸</div><div class="fc-body"><span class="fl">${t("lbl_group")}</span><b>${d.g}</b></div></div>
+  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)">📍</div><div class="fc-body"><span class="fl">${t("lbl_district")}</span><b>${d.upz?esc(d.upz)+", ":""}${esc(d.d)}</b></div></div>
+  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,#9b5de5 15%,transparent);color:#9b5de5">👁</div><div class="fc-body"><span class="fl">${t("show_avail")}</span><b>${d.av?t("avail"):t("unavail")}</b></div></div>
+  <div class="field-card"><div class="fc-ico" style="background:color-mix(in srgb,#2f6fed 15%,transparent);color:#2f6fed">📞</div><div class="fc-body"><span class="fl">${t("lbl_phone")}</span><b>${esc(d.ph)}</b></div></div>
+  </div><a class="btn" style="display:block;text-align:center;text-decoration:none;margin-top:14px" href="tel:${esc(d.ph)}">📞 ${t("call")}</a>`:""}
+  </div></div></div>
+  <div class="profwrap" style="display:grid;gap:12px;max-width:640px;margin:0 auto"><h3 style="margin:0">${t("user_reqs")}</h3>${reqs.map(r=>reqCard(r,true)).join("")||emptyState(t("no_user_reqs"))}</div>`}
 function profile(){
   const m=S.me;
   if(profileEdit||!m)return editProfileView();
@@ -853,7 +893,7 @@ function profile(){
   <button class="btn sm gh" style="width:100%;margin-top:8px" onclick="go('settings')">⚙️ ${t("settings")}</button>
   </div>
   </div>
-  <div class="profwrap" style="display:grid;gap:12px;max-width:640px;margin:0 auto"><h3 style="margin:0">${t("my_reqs")}</h3>${my.map(reqCard).join("")||emptyState(t("no_my_reqs"))}</div>`
+  <div class="profwrap" style="display:grid;gap:12px;max-width:640px;margin:0 auto"><h3 style="margin:0">${t("my_reqs")}</h3>${my.map(r=>reqCard(r,true)).join("")||emptyState(t("no_my_reqs"))}</div>`
 }
 function settingsPage(){
   return `<h2 style="margin-bottom:2px">${t("settings_h")}</h2>
@@ -879,8 +919,8 @@ function editProfileView(){
   <div class="avwrap">${avatarHTML(photo,m?m.g:"👤",80)}<button class="cam" title="${t("change_photo")}" onclick="$('#avatarInput').click()">📷</button></div>
   <div class="fg" style="text-align:left">
   <div class="full"><label>${t("lbl_full_name")}</label><input id="d_n" value="${esc(m?m.name:(user&&user.displayName)||"")}"></div>
-  <div><label>${t("lbl_group")}</label><select id="d_g">${opts(G,m&&m.g)}</select></div><div><label>${t("lbl_division")}</label><select id="d_div" onchange="cascadeDist('d')">${opts(DIVS,m?divOfDist(m.d):"Dhaka")}</select></div>
-  <div><label>${t("lbl_district")}</label><select id="d_d" onchange="cascadeUpz('d')">${opts(distsOf(m?divOfDist(m.d):"Dhaka"),m?m.d:"Dhaka")}</select></div><div><label>${t("lbl_upazila")}</label><select id="d_upz">${opts(upzOf(m&&m.d),m&&m.upz,t("any_upazila"))}</select></div>
+  <div><label>${t("lbl_group")}</label><select id="d_g">${opts(G,m&&m.g)}</select></div><div><label>${t("lbl_division")}</label><select id="d_div" onchange="cascadeDist('d')">${opts(DIVS,m?divOfDist(m.d):"",t("sel_division"))}</select></div>
+  <div><label>${t("lbl_district")}</label><select id="d_d" ${m&&divOfDist(m.d)?"":"disabled"} onchange="cascadeUpz('d')">${m&&divOfDist(m.d)?opts(distsOf(divOfDist(m.d)),m.d,t("sel_district")):opts([],"",t("pick_div_first"))}</select></div><div><label>${t("lbl_upazila")}</label><select id="d_upz" ${m&&divOfDist(m.d)?"":"disabled"}>${m&&divOfDist(m.d)?opts(upzOf(m.d),m.upz,t("sel_upazila")):opts([],"",t("pick_dist_first"))}</select></div>
   <div class="full"><label>${t("lbl_phone")}</label><div class="phgrp"><span class="flag">🇧🇩 +88</span><input id="d_p" type="tel" placeholder="01XXXXXXXXX" value="${esc(m?m.ph:(user&&user.email&&user.email.endsWith("@phone.roktosetu.app")?user.email.split("@")[0]:""))}"></div></div>
   <div class="full"><label>${t("lbl_last_don")}</label><input id="d_l" type="date" max="${new Date().toISOString().slice(0,10)}"></div>
   <div class="full"><label>${t("lbl_your_loc")}</label><div class="acts" style="margin-bottom:8px"><button type="button" class="btn sm gh" onclick="useGps('d')">${t("use_gps")}</button><span class="meta" id="d_locmsg" style="margin:0;align-self:center">${LOC.d?t("loc_set"):t("tap_map")}</span></div><div id="pickmap" class="map" style="height:230px"></div></div>
@@ -889,6 +929,7 @@ function editProfileView(){
 function regDonor(){
   const v=i=>$("#"+i).value.trim(),n=v("d_n"),p=v("d_p");
   if(!n||!/^01\d{9}$/.test(p))return toast(LANG==="bn"?"সঠিক নাম ও বাংলাদেশি ফোন নম্বর দিন (01XXXXXXXXX)":"Enter your name and a valid BD phone (01XXXXXXXXX)");
+  if(!geoOk("d"))return;
   if(!$("#d_c").checked)return toast(LANG==="bn"?"চালিয়ে যেতে সম্মতি দিন":"Please accept the consent to continue");
   const l=v("d_l"),lastMs=l?new Date(l).getTime():(S.me?S.me.lastMs:Date.now()-365*864e5);
   const off=S.me?S.me.off:[+((Math.random()-.5)*.1).toFixed(4),+((Math.random()-.5)*.1).toFixed(4)];
@@ -905,7 +946,7 @@ async function pwReset(){
 }
 view=(location.hash||"#home").slice(1);if(!ALL_VIEWS.includes(view))view="home";
 addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h!==view&&ALL_VIEWS.includes(h)){view=h;render()}});
-Object.assign(window,{$,go,chart,loc,postReq,respond,fulfil,matchList,closeM,regDonor,delMe,toggleAv,setMode,doLogin,doRegister,forgot,googleIn,signOutU,setF,useGps,setD,goDir,addFac,stockM,saveStock,verifyFac,delFac,doInstall,F,render,setProfileEdit,openSettings,toggleTheme,pwReset,uploadAvatar,showUpdated,setAV,adminDelDonor,adminToggleReq,adminDelReq,toggleNeedBy,toggleAddFac,setLang,toggleLang,toggleDrawer,togglePw,cascadeDist,cascadeUpz});
+Object.assign(window,{$,go,chart,loc,postReq,respond,fulfil,matchList,closeM,regDonor,delMe,toggleAv,setMode,doLogin,doRegister,forgot,googleIn,signOutU,setF,useGps,setD,goDir,addFac,stockM,saveStock,verifyFac,delFac,doInstall,F,render,setProfileEdit,openSettings,toggleTheme,pwReset,uploadAvatar,showUpdated,setAV,adminDelDonor,adminToggleReq,adminDelReq,toggleNeedBy,toggleAddFac,setLang,toggleLang,toggleDrawer,togglePw,cascadeDist,cascadeUpz,viewUser});
 
 // ---- PWA install prompt ----
 let deferredInstall=null;
